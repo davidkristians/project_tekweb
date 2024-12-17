@@ -51,15 +51,15 @@
     <nav class="navbar">
         <div class="navbar-brand">ReTech</div>
         <div class="navbar-links">
-            <a href="dasboard-User.php">Home</a>
+            <a href="../main/halaman-user.php">Home</a>
             <a href="#">Kategori</a>
-            <a href="/Produk/produk.php ">Produk</a>
+            <a href="../Produk/produk-Main.php">Produk</a>
             <!-- Icon Shopping Cart -->
             <a href="cart.php">
                 <i class="fas fa-shopping-cart" title="Shopping Cart"></i>
             </a>
             <!-- Icon Profile -->
-            <a href="profile.php">
+            <a href="../main/halaman-profile.php">
                 <i class="fas fa-user" title="Profile"></i>
             </a>
             <!-- Icon Logout -->

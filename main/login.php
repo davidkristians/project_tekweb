@@ -34,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION["user_name"] = $user["nama"];
             $_SESSION["user_id"] = $user["user_id"];
 
-            header("Location: dasboard-User.php");
+            header("Location: ../main/halaman-user.php");
             exit(); 
         } else {
             echo "Email atau password salah.";

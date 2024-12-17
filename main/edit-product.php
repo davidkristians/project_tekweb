@@ -3,7 +3,7 @@ session_start();
 
 // Mengecek apakah pengguna sudah login
 if (!isset($_SESSION['user_email']) || !isset($_SESSION['user_name'])) {
-    header("Location: dashboard-Default.php");
+    header("Location: ../main/halaman-default.php");
     exit();
 }
 
@@ -116,13 +116,13 @@ try {
 <nav class="navbar">
     <div class="navbar-brand">ReTech</div>
     <div class="navbar-links">
-        <a href="/Main/dasboard-User.php">Home</a>
+        <a href="../main/halaman-user.php">Home</a>
         <a href="#">Kategori</a>
-        <a href="#">Produk</a>
-        <a href="cart.html">
+        <a href="../Produk/produk-Main.php">Produk</a>
+        <a href="cart.html"> <!--ubah cart di product.php-->
             <i class="fas fa-shopping-cart" title="Shopping Cart"></i>
         </a>
-        <a href="/Main/profile.php">
+        <a href="../main/halaman-profile.php">
             <i class="fas fa-user" title="Profile"></i>
         </a>
         <a href="logout.php">

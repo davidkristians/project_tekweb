@@ -73,9 +73,9 @@
     <nav class="navbar">
     <div class="navbar-brand">ReTech</div>
         <div class="navbar-links">
-        <a href="/Main/dashboard-Default.php">Home</a>
+        <a href="../main/halaman-default.php">Home</a>
         <a href="#">Kategori</a>
-        <a href="/Produk/produk-Default.php">Produk</a>
+        <a href="../Produk/produk-Default.php">Produk</a>
         <a href="#" id="open-form-btn">Masuk/Daftar</a>
         </div>
     </nav>
