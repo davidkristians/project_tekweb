@@ -1,0 +1,69 @@
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(to bottom, #000, #333);
+    color: #f5f5f5;
+}
+
+.profile {
+    max-width: 1240px;
+    margin: 50px auto;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.5);
+    padding: 20px 30px;
+    text-align: center;
+}
+
+.profile h2 {
+    font-size: 2rem;
+    color: rgb(255, 255, 255);
+    margin-bottom: 20px;
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+.profile form div {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.profile label {
+    display: block;
+    font-weight: bold;
+    color: gold;
+}
+
+.profile input,
+.profile textarea {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid rgb(255, 255, 255);
+    border-radius: 5px;
+    background: #111;
+    color: #f5f5f5;
+}
+
+.profile button {
+    background: gold;
+    color: #111;
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 10px 0;
+}
+
+.profile button:hover {
+    background: #f1c40f;
+    transform: scale(1.05);
+}
+
+.profile p {
+    margin-top: 20px;
+    color: #f5f5f5;
+    font-style: italic;
+}
