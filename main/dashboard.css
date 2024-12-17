@@ -9,7 +9,11 @@ body {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
-  background-color: white;
+  background-image: url('../img/bg1.jpg'); /* Ganti dengan URL gambar Anda */
+  background-size: cover; /* Menyesuaikan ukuran gambar */
+  background-repeat: no-repeat; /* Tidak mengulang gambar */
+  background-attachment: fixed; /* Membuat background fix */
+  background-position: center; /* Gambar di posisi tengah */
 }
 
 /* Navbar */
@@ -56,10 +60,10 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-image: url("../img/bg1.jpg");
+  /* background-image: url("../img/bg1.jpg");
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: center;
+  background-position: center; */
   position: relative;
   filter: grayscale(100%);
 }
