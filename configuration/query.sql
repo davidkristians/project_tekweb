@@ -37,3 +37,9 @@ CREATE TABLE transactions (
     status_pembayaran VARCHAR(10) CHECK (status_pembayaran IN ('Pending', 'Sukses', 'Gagal')) NOT NULL,
     status_pengiriman VARCHAR(15) CHECK (status_pengiriman IN ('Dikirim', 'Selesai', 'Dikembalikan')) NOT NULL
 );
+
+INSERT INTO produk (nama_produk, merk_produk, kategori, deskripsi, kondisi_barang, harga, jumlah_stock, gambar_produk, penjual_id)
+VALUES
+    ('Iphone 13 Pro Max', 'Apple', 'HP', 'Kondisi mulus 100%, charger lengkap. Warna biru.', '90%', 10000000.00, 5, 'https://i.pinimg.com/736x/26/be/56/26be56634ad9773c9d8f6315cac2cba7.jpg', 1),
+    ('Samsung Z-Flip', 'Samsung', 'HP', 'Kondisi mulus 100%, tidak ada lecet. Warna biru.', '90%', 13000000.00, 3, 'https://i.pinimg.com/736x/10/af/7d/10af7dacc86d19a1ec8e50e8f8038ac6.jpg', 1),
+    ('Laptop ROG Zephyrus Duo', 'Asus', 'Laptop', 'Kondisi mulus, masih bisa untuk gaming, charger lengkap, ada screen protector. Warna hitam.', '80%', 15000000.00, 2, 'https://i.pinimg.com/736x/36/7b/21/367b211afca91a2026b33b827364cc43.jpg', 1)
