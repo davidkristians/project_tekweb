@@ -31,28 +31,13 @@ body {
   transition: all 0.3s ease;
 }
 
-.navbar a {
-  color: white;
-  text-decoration: none;
-  margin: 0 1rem;
-  font-size: 1rem;
-  transition: color 0.3s;
-}
 
-.navbar a:hover {
-  color: #f0c040;
-}
 
-.navbar-brand {
-  font-weight: 600;
-  font-size: 1.5rem;
-  color: white;
-}
 
-.navbar-links {
-  display: flex;
-  align-items: center;
-}
+
+
+
+
 
 /* Hero Section */
 .hero {

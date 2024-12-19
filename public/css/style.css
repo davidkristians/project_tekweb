@@ -1,0 +1,25 @@
+/* PUBLIC CSS */
+
+@font-face {
+  font-family: "Poppins";
+  src: url("/public/font/poppins/Poppins-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Poppins";
+  src: url("/public/font/poppins/Poppins-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Coolvetica";
+  src: url("/public/font/coolvetica/Coolvetica\ Rg.otf") format("truetype");
+  font-weight: normal;
+}
+
+body {
+  font-family: "Coolvetica", sans-serif;
+}
