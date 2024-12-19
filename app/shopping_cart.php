@@ -41,7 +41,7 @@ try {
 </head>
 <body>
 
-<div class="cart-sidebar">
+<div class="cart-sidebars">
     <h2>Keranjang Belanja</h2>
     <div class="cart-list">
         <?php if (!empty($cartItems)): ?>
@@ -108,7 +108,7 @@ function updateCart() {
 }
 
 function changeQuantity(productId, newQuantity) {
-    if (newQuantity < 1) return; // Jangan izinkan jumlah kurang dari 1
+    if (newQuantity < 0) return; // Jangan izinkan jumlah kurang dari 0
 
     // Update jumlah di array keranjang
     const item = cart.find(i => i.produk_id === productId);

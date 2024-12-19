@@ -44,7 +44,24 @@
     } catch (PDOException $e) {
         $message = "Error: " . $e->getMessage();
     }
+
     $cartItems = [];
+
+if ($isLoggedIn) {
+    try {
+        $userId = $_SESSION['user_id']; // Assuming user_id is stored in session
+        $stmt = $conn->prepare("SELECT p.produk_id, p.nama_produk, p.harga, p.gambar_produk, c.quantity 
+                                 FROM shopping_cart c
+                                 JOIN produk p ON c.produk_id = p.produk_id
+                                 WHERE c.user_id = :user_id");
+        $stmt->bindParam(':user_id', $userId);
+        $stmt->execute();
+        $cartItems = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        echo "Error: " . $e->getMessage();
+    }
+
+}
 ?>
 
 <!DOCTYPE html>
@@ -123,6 +140,39 @@
         <button class="carousel-btn" id="nextBtn">&#10095;</button>
       </div>
     </section>
+
+<!-- Shopping Cart Sidebar -->
+
+<div class="cart-sidebar">
+    <h2>Keranjang Belanja</h2>
+    <div class="cart-list">
+        <?php if (!empty($cartItems)): ?>
+            <?php foreach ($cartItems as $item): ?>
+                <div class="cart-item">
+                    <div class="cart-item-content">
+                        <img src="<?= htmlspecialchars($item['gambar_produk']) ?>" alt="<?= htmlspecialchars($item['nama_produk']) ?>" class="cart-item-image">
+                        <div class="cart-item-details">
+                            <p class="cart-item-name"><?= htmlspecialchars($item['nama_produk']) ?> x <?= htmlspecialchars($item['quantity']) ?></p>
+                            <p class="cart-item-price"><?= number_format($item['harga'] * $item['quantity'], 0, ',', '.') ?> IDR</p>
+                        </div>
+                        <div class="cart-item-actions">
+                            <button onclick="changeQuantity(<?= $item['produk_id'] ?>, <?= $item['quantity'] - 1 ?>)">-</button>
+                            <button onclick="changeQuantity(<?= $item['produk_id'] ?>, <?= $item['quantity'] + 1 ?>)">+</button>
+                        </div>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <p>Keranjang belanja kosong.</p>
+        <?php endif; ?>
+    </div>
+
+    <div class="cart-total">
+        <p>Total: <span class="total-price"><?= number_format(array_sum(array_column($cartItems, 'harga')), 0, ',', '.') ?></span> IDR</p>
+        <button class="checkout-btn">Checkout</button>
+    </div>
+
+</div>
 
     <!-- Produk Section -->
     <?php if (!empty($produkData)): ?>
