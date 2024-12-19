@@ -3,7 +3,7 @@
     $port = "5432";          
     $dbname = "Web-Ecommerce"; 
     $dbUser = "postgres";    
-    $dbPassword = "456287";  
+    $dbPassword = "postgres";  
 
     $message = "";
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -115,7 +115,7 @@
         </ul>
         <div class="nav-icons">
             <a href=""><i data-feather="shopping-cart"></i></a>
-            <a href="#" id="open-form-btn">Masuk/Daftar</a>
+            <a href="#" id="open-form-btn"><i data-feather="user"></i></a>
         </div>
       </div>
     </nav>
@@ -237,9 +237,9 @@
 
     <div class="deskripsi">
     <h1>
-  <a href="" class="typewrite" data-period="2000" data-type='[ "adalah Platform Jual Beli Barang Bekas Berkualitas Tinggi.", "adalah tempat menemukan gadget impian dengan harga murah!", "adalah Platform Jual Beli Barang Bekas Berkualitas Tinggi.", "adalah tempat menemukan gadget impian dengan harga murah!" ]'>
+  <p class="typewrite" data-period="2000" data-type='[ "adalah Platform Jual Beli Barang Bekas Berkualitas Tinggi.", "adalah tempat menemukan gadget impian dengan harga murah!", "adalah Platform Jual Beli Barang Bekas Berkualitas Tinggi.", "adalah tempat menemukan gadget impian dengan harga murah!" ]'>
     <span class="wrap"></span>
-  </a>
+  </p>
 </h1>
     </div>
   </div>
@@ -302,21 +302,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     <!-- Navbar -->
     <!-- <nav class="navbar">
     <div class="navbar-brand">
@@ -373,20 +358,8 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
     <!-- JavaScript for toggle between register and login -->
     <script>
-
             // Menampilkan form dan overlay ketika tombol Daftar/Masuk ditekan
       const openFormButton = document.getElementById('open-form-btn');
       const formContainer = document.getElementById('form-container');

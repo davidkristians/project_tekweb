@@ -171,12 +171,6 @@ footer {
   max-width: 300px;
 }
 
-.social-icons a {
-  display: inline-block;
-  margin: 0rem 1rem 2rem 0rem ;
-  color: black;
-}
-
 .deskripsi {
   width: 50rem;
   align-items: center;
