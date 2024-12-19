@@ -3,7 +3,7 @@ session_start();
 
 // Mengecek apakah pengguna sudah login
 if (!isset($_SESSION['user_email']) || !isset($_SESSION['user_name'])) {
-    header("Location: ../main/halaman-default.php");
+    header("Location: ../app/halaman-default.php");
     exit();
 }
 
@@ -12,7 +12,7 @@ $host = "localhost";
 $port = "5432";
 $dbname = "Web-Ecommerce";
 $dbUser = "postgres";
-$dbPassword = "postgres";
+$dbPassword = "456287";
 
 $message = "";
 
@@ -58,7 +58,7 @@ try {
                 $stmt = $conn->prepare("DELETE FROM users WHERE user_id = :user_id");
                 $stmt->execute([':user_id' => $userId]);
                 session_destroy();
-                header("Location: ../main/halaman-default.php");
+                header("Location: ../app/halaman-default.php");
                 exit();
             } catch (PDOException $e) {
                 $message = "Error: " . $e->getMessage();
@@ -68,7 +68,7 @@ try {
         if (isset($_POST['logout'])) {
             // Logout
             session_destroy();
-            header("Location: ../main/halaman-default.php");
+            header("Location: ../app/halaman-default");
             exit();
         }
 
@@ -125,8 +125,8 @@ try {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../main/dashboard.css">
-    <link rel="stylesheet" href="../main/profile.css">
+    <link rel="stylesheet" href="../app/halaman-default.css">
+    <link rel="stylesheet" href="../app/profile.css">
 </head>
 <body>
 <nav class="navbar">

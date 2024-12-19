@@ -3,7 +3,7 @@
     $port = "5432";          
     $dbname = "Web-Ecommerce"; 
     $dbUser = "postgres";    
-    $dbPassword = "postgres";  
+    $dbPassword = "456287";  
 
     $message = "";
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -51,6 +51,20 @@
             $message = "Error: " . $e->getMessage();
         }
     }
+
+        // Mengambil Data Produk
+    $produkData = [];
+      try {
+        $conn = new PDO("pgsql:host=$host;port=$port;dbname=$dbname", $dbUser, $dbPassword);
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        $sql = "SELECT * FROM produk";
+        $stmt = $conn->query($sql);
+        $produkData = $stmt->fetchAll(PDO::FETCH_ASSOC);
+      } catch (PDOException $e) {
+          $message = "Error: " . $e->getMessage();
+    }
+
 ?>
 
 <!DOCTYPE html>
@@ -101,7 +115,7 @@
         </ul>
         <div class="nav-icons">
             <a href=""><i data-feather="shopping-cart"></i></a>
-            <a href="#" id="open-form-btn"><i data-feather="user"></i></a>
+            <a href="#" id="open-form-btn">Masuk/Daftar</a>
         </div>
       </div>
     </nav>
@@ -125,8 +139,29 @@
       </div>
     </section>
 
+
+    <?php if (!empty($produkData)): ?>
+    <section class="products">
+        <?php foreach ($produkData as $produk): ?>
+            <div class="card">
+                <img src="<?= htmlspecialchars($produk['gambar_produk']) ?>" alt="<?= htmlspecialchars($produk['nama_produk']) ?>" />
+                <div class="judul_deskripsi_harga">
+                    <h3><?= htmlspecialchars($produk['nama_produk']) ?></h3>
+                    <p><?= htmlspecialchars($produk['deskripsi']) ?></p>
+                    <p><em><?= htmlspecialchars($produk['kondisi_barang']) ?></em></p>
+                    <div class="price">Rp <?= number_format($produk['harga'], 0, ',', '.') ?></div>
+                </div>
+            </div>
+        <?php endforeach; ?>
+    </section>
+    <?php else: ?>
+        <p>Produk belum tersedia.</p>
+    <?php endif; ?>
+
+
+
     <!--=====PRODUCT MODIFIED FIXED=====-->
-    <div class="produk_kami">
+    <!-- <div class="produk_kami">
       <h1>Pilih Barang Anda</h1>
     </div>
     <section class="products">
@@ -189,10 +224,10 @@
           <div class="price">Rp 4,500,000</div>
         </div>
         </div>
-    </section>
+    </section> -->
 
     <!--=====FOOTER MODIFIED FIXED=====-->
-    <footer>
+<footer>
   <div class="footer-container">
     <div class="footer-left">
       <div class="logo">

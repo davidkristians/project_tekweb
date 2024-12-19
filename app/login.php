@@ -9,7 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $servername = "localhost";
     $username = "postgres";
-    $db_password = "postgres";
+    $db_password = "456287";
     $dbname = "Web-Ecommerce";
     $port = "5432";
 
@@ -34,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION["user_name"] = $user["nama"];
             $_SESSION["user_id"] = $user["user_id"];
 
-            header("Location: ../main/halaman-user.php");
+            header("Location: ../app/halaman-user.php");
             exit(); 
         } else {
             echo "Email atau password salah.";
