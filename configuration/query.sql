@@ -23,6 +23,7 @@ CREATE TABLE produk (
 
 CREATE TABLE shopping_cart (
     shopping_cart_id SERIAL PRIMARY KEY,
+	quantity INT DEFAULT 1,
     user_id INT REFERENCES users(user_id) ON DELETE CASCADE,
     produk_id INT REFERENCES produk(produk_id) ON DELETE CASCADE
 );
