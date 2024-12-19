@@ -1,8 +1,54 @@
+/* * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
-    margin: 0;
-    font-family: 'Poppins', sans-serif;
-    background: linear-gradient(to bottom, #000, #333);
-    color: #f5f5f5;
+  line-height: 1.6;
+} */
+
+/* BAGIAN NAVBAR */
+/* .navbar {
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 5rem;
+  background-color: #f8f8f8;
+  border-bottom: 1px solid #777777;
+}
+
+.navbar .navbar_contents .logo {
+  width: 100px;
+}
+
+.navbar_contents {
+  width: 1200px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem auto;
+  margin: 0rem 4rem;
+}
+
+.navbar_contents .nav-links {
+  display: flex;
+  list-style: none;
+}
+
+.navbar_contents .nav-links li {
+  margin: 0 1rem;
+}
+
+.navbar_contents .nav-links a {
+  text-decoration: none;
+  color: #333;
+  font-size: 20px;
+}
+
+.navbar_contents .nav-icons a {
+  display: inline-flex;
+  margin-left: 1rem;
+  cursor: pointer;
 }
 
 .profile {
@@ -66,4 +112,5 @@ body {
     margin-top: 20px;
     color: #f5f5f5;
     font-style: italic;
-}
+} */
+

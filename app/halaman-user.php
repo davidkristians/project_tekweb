@@ -116,7 +116,7 @@ if ($isLoggedIn) {
             </a>
             <a href="../app/halaman-profile.php" id="open-form-btn"><i data-feather="user"></i></a>
             <a href="../app/logout.php">
-                <i class="fas fa-sign-out-alt" title="Logout"></i>
+                <i data-feather="log-out"></i>
             </a>
         </div>
       </div>
@@ -189,10 +189,11 @@ if ($isLoggedIn) {
                 </div>
             </div>
         <?php endforeach; ?>
-    </section>
     <?php else: ?>
         <p>Produk belum tersedia.</p>
     <?php endif; ?>
+    </section>
+    
 
 
     <!--=====FOOTER MODIFIED FIXED=====-->
