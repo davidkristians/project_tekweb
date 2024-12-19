@@ -185,7 +185,7 @@ if ($isLoggedIn) {
                     <p><?= htmlspecialchars($produk['deskripsi']) ?></p>
                     <p><em><?= htmlspecialchars($produk['kondisi_barang']) ?></em></p>
                     <div class="price">Rp <?= number_format($produk['harga'], 0, ',', '.') ?></div>
-                    <button onclick="addToCart(<?= $produk['produk_id']; ?>)">Tambahkan ke Keranjang</button>
+                    <button class="tambah-keranjang" onclick="addToCart(<?= $produk['produk_id']; ?>)">Tambahkan ke Keranjang</button>
                 </div>
             </div>
         <?php endforeach; ?>
