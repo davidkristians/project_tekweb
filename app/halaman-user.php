@@ -15,7 +15,7 @@
     $port = "5432";
     $dbname = "Web-Ecommerce";
     $dbUser = "postgres";
-    $dbPassword = "456287";
+    $dbPassword = "postgres";
 
     try {
         $conn = new PDO("pgsql:host=$host;port=$port;dbname=$dbname", $dbUser, $dbPassword);
@@ -71,7 +71,7 @@
     <!-- CSS UNTUK SEMUA HALAMAN -->
     <link rel="stylesheet" href="../public/css/style.css">
     <!-- CSS KHUSUS UNTUK HALAMAN INI -->
-    <link rel="stylesheet" href="../app/halaman-default.css">
+    <link rel="stylesheet" href="../app/halaman-default-baru.css">
     <link rel="stylesheet" href="../Produk/produk.css">
 </head>
 

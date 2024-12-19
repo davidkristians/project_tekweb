@@ -1,5 +1,5 @@
 /* BAGIAN KESELURUHAN */
-/* * {
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -7,15 +7,19 @@
 
 body {
   line-height: 1.6;
-} */
+}
 
 /* BAGIAN NAVBAR */
-/* .navbar {
+.navbar {
+    overflow: hidden;
+    position: sticky;
+    top: 0;
   justify-content: center;
   align-items: center;
   padding: 2rem 5rem;
   background-color: #f8f8f8;
   border-bottom: 1px solid #777777;
+  z-index: 1;
 }
 
 .navbar .navbar_contents .logo {
@@ -50,10 +54,10 @@ body {
   display: inline-flex;
   margin-left: 1rem;
   cursor: pointer;
-} */
+}
 
 /* BAGIAN HERO SECTION */
-/* .carousel {
+.carousel {
   position: relative;
   width: 100%;
   max-width: 1200px;
@@ -97,10 +101,10 @@ body {
 
 .carousel-btn:hover {
   background-color: rgba(0, 0, 0, 0.7);
-} */
+}
 
 /* BAGIAN PRODUK KAMI */
-/* .produk_kami {
+.produk_kami {
   font-size: 35px;
   margin: 2rem 20rem 1rem;
 }
@@ -145,11 +149,11 @@ body {
   font-size: 25px;
   font-weight: bold;
   margin-top: 0.5rem;
-} */
+}
 
 
 /* BAGIAN FOOTER */
-/* footer {
+footer {
   background-color: #ffffff;
   color: black;
   font-family: Arial, sans-serif;
@@ -164,7 +168,7 @@ body {
 .footer-container {
   display: flex;
   justify-content: space-between;
-  margin: 10rem 25rem;
+  margin: 10rem 10rem;
 }
 
 .footer-left {
@@ -188,13 +192,21 @@ body {
 
 .footer-bottom p {
   margin: 3rem 0rem;
-} */
+}
+
+
+
+
+
+
+
+
 
 
 
 
 /* BAGIAN FORM SECTION */
-/* .form-container {
+.form-container {
   position: fixed;
   top: 50%;
   left: 50%;
@@ -202,7 +214,7 @@ body {
   background-color: rgba(255, 255, 255, 1);
   padding: 30px;
   border-radius: 10px;
-  width: 500px;
+  width: 500px; /* Lebih lebar */
   max-width: 100%;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   z-index: 9999;
@@ -216,10 +228,10 @@ body {
 .form-container h2 {
   text-align: center;
   margin-bottom: 20px;
-} */
+}
 
 /* FORM REGIST : TAB REGISTER/LOGIN */
-/* .tabs {
+.tabs {
   display: flex;
   justify-content: center;
   margin-bottom: 1rem;
@@ -242,11 +254,11 @@ body {
 .form-container #register-tab, .form-container #login-tab {
   text-align: center;
   border: 1px solid #777777;
-} */
+}
 
 
 /* FORM REGIST : LAYOUTING FORM */
-/* .form-group {
+.form-group {
   margin-bottom: 1.5rem;
 }
 
@@ -258,15 +270,15 @@ body {
   border-radius: 5px;
   outline: none;
   transition: border 0.3s;
-} */
+}
 
 /* WARNA BORDER BERUBAH KETIKA MENGISI SATU FORM */
-/* .form-container input:focus {
+.form-container input:focus {
   border-color: black;
-} */
+}
 
 /* WARNA BORDER "PILIH ROLE" */
-/* .form-container .input-box{
+.form-container .input-box{
   border: 1px solid #7777779a;
   padding: 1rem;
   margin-bottom: 1.5rem;
@@ -308,4 +320,109 @@ body {
 }
 .heading span {
   color: white;
-} */
+}
+
+
+/* BAGIAN TOAST "SELAMAT DATANG USER !" */
+.toast-container{
+    background-color: #333;
+}
+
+.toast-container .toast .d-flex {
+    width: 300px;
+}
+
+.toast-container .toast .toast-body {
+    font-size: 20px;
+}
+
+
+
+
+
+
+
+
+
+
+/* MEDIA QUERIES KETIKA DI LAPTOP */
+@media (max-width: 1366px) {
+    /* BAGIAN FOOTER */
+    .footer-container {
+        display: flex;
+        justify-content: space-between;
+        margin: 10rem 20rem;
+      }
+
+    .logo {
+        width: 150px;
+      }
+
+      .deskripsi {
+        width: 50rem;
+        align-items: center;
+        margin: auto;
+        font-size: 20px;
+        text-align: justify;
+      }
+
+      .footer-bottom {
+        text-align: center;
+        border-top: 1px solid #c7c7c7;
+        font-size: 15px;
+        color: black;
+      }
+
+      .footer-bottom p {
+        margin: 2rem 0rem;
+      }
+
+
+
+
+
+
+    /* BAGIAN FORM REGISTRASI/LOGIN */
+    .form-container {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: rgba(255, 255, 255, 1);
+        padding: 30px;
+        border-radius: 10px;
+        width: 500px; /* Lebih lebar */
+        max-width: 100%;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        z-index: 9999;
+        display: none;
+      }
+
+      .tabs div {
+        font-size: 1rem;
+        width: 80px;
+        padding: 0.2rem 0.5rem;
+        cursor: pointer;
+        transition: background-color 0.3s, color 0.3s;
+      }
+
+      .form-group {
+        margin-bottom: 1rem;
+      }
+      
+      .form-container input {
+        width: 100%;
+        padding: 0.3rem 1rem;
+        font-size: 1rem;
+        border: 2px solid #ddd;
+        border-radius: 5px;
+        outline: none;
+        transition: border 0.3s;
+      }
+
+      .form-container .input-box{
+        border: 1px solid #7777779a;
+        padding: 0.3rem 1rem;
+        margin-bottom: 1.5rem;
+      }
+}

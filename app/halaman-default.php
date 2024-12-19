@@ -91,7 +91,7 @@
     <!-- CSS UNTUK SEMUA HALAMAN -->
     <link rel="stylesheet" href="../public/css/style.css">
     <!-- CSS KHUSUS UNTUK HALAMAN INI -->
-    <link rel="stylesheet" href="../app/halaman-default.css">
+    <link rel="stylesheet" href="../app/halaman-default-baru.css">
   </head>
 
   <!-- FEATHER ICON -->
