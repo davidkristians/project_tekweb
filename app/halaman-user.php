@@ -17,6 +17,21 @@
     $dbUser = "postgres";
     $dbPassword = "456287";
 
+    try {
+        $conn = new PDO("pgsql:host=$host;port=$port;dbname=$dbname", $dbUser, $dbPassword);
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        // Query untuk mengambil produk yang ditambahkan oleh penjual
+        $stmt = $conn->prepare("SELECT p.produk_id, p.nama_produk, p.merk_produk, p.kondisi_barang, p.harga, p.jumlah_stock, p.deskripsi, p.gambar_produk, u.nama AS penjual_name 
+                                FROM produk p
+                                JOIN users u ON p.penjual_id = u.user_id
+                                WHERE p.jumlah_stock > 0"); // Hanya produk dengan stok > 0
+        $stmt->execute();
+        $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        echo "Error: " . $e->getMessage();
+    }
+
     // Mengambil Data Produk
     $produkData = [];
     try {
@@ -29,6 +44,7 @@
     } catch (PDOException $e) {
         $message = "Error: " . $e->getMessage();
     }
+    $cartItems = [];
 ?>
 
 <!DOCTYPE html>
@@ -56,6 +72,7 @@
     <link rel="stylesheet" href="../public/css/style.css">
     <!-- CSS KHUSUS UNTUK HALAMAN INI -->
     <link rel="stylesheet" href="../app/halaman-default.css">
+    <link rel="stylesheet" href="../Produk/produk.css">
 </head>
 
 <!-- FEATHER ICON -->
@@ -77,7 +94,9 @@
             <li><a href="#">Promo</a></li>
         </ul>
         <div class="nav-icons">
-            <a href=""><i data-feather="shopping-cart"></i></a>
+            <a class="cart-icon" href="../app/shopping_cart.php">
+                <i data-feather="shopping-cart"></i><span class="cart-count">0</span>
+            </a>
             <a href="../app/halaman-profile.php" id="open-form-btn"><i data-feather="user"></i></a>
             <a href="../app/logout.php">
                 <i data-feather="log-out"></i>
@@ -116,6 +135,7 @@
                     <p><?= htmlspecialchars($produk['deskripsi']) ?></p>
                     <p><em><?= htmlspecialchars($produk['kondisi_barang']) ?></em></p>
                     <div class="price">Rp <?= number_format($produk['harga'], 0, ',', '.') ?></div>
+                    <button onclick="addToCart(<?= $produk['produk_id']; ?>)">Tambahkan ke Keranjang</button>
                 </div>
             </div>
         <?php endforeach; ?>
@@ -147,6 +167,7 @@
     </div>
     </footer>
 
+    
 
     <!-- Pop-up -->
     <?php if ($isLoggedIn): ?>
@@ -173,7 +194,7 @@
         });
     </script>
 
-    <!-- FEATHER ICONS SCRIPT -->
+<!-- FEATHER ICONS SCRIPT -->
 <script>
   feather.replace();
 </script>
@@ -205,15 +226,15 @@
 
     <!-- TYPEWRITER EFFECT FOOTER -->
     <script>
-var TxtType = function(el, toRotate, period) {
-        this.toRotate = toRotate;
-        this.el = el;
-        this.loopNum = 0;
-        this.period = parseInt(period, 10) || 2000;
-        this.txt = '';
-        this.tick();
-        this.isDeleting = false;
-    };
+        var TxtType = function(el, toRotate, period) {
+            this.toRotate = toRotate;
+            this.el = el;
+            this.loopNum = 0;
+            this.period = parseInt(period, 10) || 2000;
+            this.txt = '';
+            this.tick();
+            this.isDeleting = false;
+        };
 
     TxtType.prototype.tick = function() {
         var i = this.loopNum % this.toRotate.length;
@@ -262,6 +283,106 @@ var TxtType = function(el, toRotate, period) {
         css.innerHTML = ".typewrite > .wrap { border-right: 0.08em solid #000}";
         document.body.appendChild(css);
     };
+    </script>
+
+    <script>
+        // Produk dari database
+        let products = <?php echo json_encode($products, JSON_HEX_TAG); ?>;
+
+        // Keranjang belanja
+        let cart = [];
+
+        function toggleCart() {
+            document.querySelector('.cart-sidebar').classList.toggle('active');
+        }
+
+        function addToCart(id) {
+            let product = products.find(p => p.produk_id == id);
+            if (product) {
+                let cartItem = cart.find(c => c.produk_id == id);
+                if (cartItem) {
+                    cartItem.quantity++;
+                } else {
+                    cart.push({ ...product, quantity: 1 });
+                }
+                updateCart();
+
+                // Kirim data ke server untuk disimpan di database
+                const userId = <?php echo isset($_SESSION['user_id']) ? $_SESSION['user_id'] : 'null'; ?>;
+                if (userId) {
+                    fetch('../configuration/add_to_cart.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            user_id: userId,
+                            produk_id: id,
+                            quantity: 1
+                        })
+                    }).then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            console.log('Produk berhasil ditambahkan ke keranjang');
+                        } else {
+                            console.error('Gagal menambahkan produk ke keranjang');
+                        }
+                    }).catch(error => console.error('Error:', error));
+                }
+            }
+        }
+
+
+function updateCart() {
+    const cartList = document.querySelector('.cart-list');
+    const totalPrice = document.querySelector('.total-price');
+    const cartCount = document.querySelector('.cart-count');
+
+    cartList.innerHTML = ''; // Clear the current cart list
+    let total = 0;
+    let count = 0;
+
+    cart.forEach(item => {
+        total += item.harga * item.quantity; // Calculate total price
+        count += item.quantity; // Count total items
+
+        const cartItem = document.createElement('div');
+        cartItem.classList.add('cart-item');
+        cartItem.innerHTML = `
+            <div class="cart-item-content">
+                <img src="${item.gambar_produk}" alt="${item.nama_produk}" class="cart-item-image">
+                <div class="cart-item-details">
+                    <p class="cart-item-name">${item.nama_produk} x ${item.quantity}</p>
+                    <p class="cart-item-price">${(item.harga * item.quantity).toLocaleString()} IDR</p>
+                </div>
+                <div class="cart-item-actions">
+                    <button onclick="changeQuantity(${item.produk_id}, ${item.quantity - 1})">-</button>
+                    <button onclick="changeQuantity(${item.produk_id}, ${item.quantity + 1})">+</button>
+                </div>
+            </div>
+        `;
+        cartList.appendChild(cartItem);
+    });
+
+    totalPrice.textContent = total.toLocaleString(); // Update total price
+    cartCount.textContent = count; // Update cart count
+}
+
+
+
+        function changeQuantity(id, quantity) {
+            let cartItem = cart.find(c => c.produk_id == id);
+            if (cartItem) {
+                if (quantity <= 0) {
+                    // Remove item from cart if quantity is 0 or less
+                    cart = cart.filter(c => c.produk_id != id);
+                } else {
+                    // Update the quantity
+                    cartItem.quantity = quantity;
+                }
+                updateCart(); // Update the cart display
+            }
+        }
     </script>
 
 </body>
