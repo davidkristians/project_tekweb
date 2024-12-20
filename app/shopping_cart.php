@@ -37,20 +37,145 @@ try {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Keranjang Belanja</title>
-    <link rel="stylesheet" href="../Produk/produk.css">
-</head>
-<body>
 
-<div class="cart-sidebars">
-    <h2>Keranjang Belanja</h2>
-    <div class="cart-list">
+    <!-- GOOGLE FONTS -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+    <!-- BOOTSTRAP -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
+    <!-- BOOTSTRAP ICON -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <!-- TAILWIND -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- CSS UNTUK SEMUA HALAMAN -->
+    <link rel="stylesheet" href="../public/css/style.css">
+    <!-- CSS KHUSUS UNTUK HALAMAN INI -->
+    <link rel="stylesheet" href="../app/shopping_cart_baru.css">
+    <!-- <link rel="stylesheet" href="../Produk/produk.css"> -->
+</head>
+
+<!-- FEATHER ICON -->
+<script src="https://unpkg.com/feather-icons"></script>
+
+<body>
+    <!--=====NAVBAR MODIFIED FIXED=====-->
+    <nav class="navbar">
+      <div class="navbar_contents">
+        <div class="logo">
+          <img src="../public/img/logo/redget_logo.png" alt="Redget">
+        </div>
+        <ul class="nav-links" style=
+        "padding-left: 0;
+        margin-bottom: 0;
+        ">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Kategori</a></li>
+            <li><a href="#">Promo</a></li>
+        </ul>
+        <div class="nav-icons">
+            <a href=""><i data-feather="shopping-cart"></i></a>
+            <a href="#" id="open-form-btn"><i data-feather="user"></i></a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- BAGIAN BODY KERANJANG SAYA -->
+    <!-- <h2 class="judul_keranjang_saya">Keranjang Saya</h2>
+    <div class="container">
+        <div class="cart-items">
+            <div class="cart-item">
+                <img src="sienna-tshirt.jpg" alt="Basic Tee Sienna">
+                <div class="item-details">
+                    <h3>Basic Tee</h3>
+                    <p>Sienna | Large</p>
+                    <p class="status in-stock">✔ In stock</p>
+                </div>
+                <div class="item-quantity">
+                    <label for="qty1">Qty:</label>
+                    <select id="qty1">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                </div>
+                <p class="item-price"></p>
+            </div>
+            <div class="cart-item">
+                <img src="black-tshirt.jpg" alt="Basic Tee Black">
+                <div class="item-details">
+                    <h3>Basic Tee</h3>
+                    <p>Black | Large</p>
+                    <p class="status delayed">Ships in 3–4 weeks</p>
+                </div>
+                <div class="item-quantity">
+                    <label for="qty2">Qty:</label>
+                    <select id="qty2">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                </div>
+                <p class="item-price">$32.00</p>
+            </div>
+            <div class="cart-item">
+                <img src="tumbler.jpg" alt="Nomad Tumbler">
+                <div class="item-details">
+                    <h3>Nomad Tumbler</h3>
+                    <p>White</p>
+                    <p class="status in-stock">✔ In stock</p>
+                </div>
+                <div class="item-quantity">
+                    <label for="qty3">Qty:</label>
+                    <select id="qty3">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                </div>
+                <p class="item-price">$35.00</p>
+            </div>
+        </div>
+
+        <div class="order-summary">
+            <h3>Order Summary</h3>
+            <div class="summary-item">
+                <span>Subtotal</span>
+                <span>$99.00</span>
+            </div>
+            <div class="summary-item">
+                <span>Shipping estimate</span>
+                <span>$5.00</span>
+            </div>
+            <div class="summary-item">
+                <span>Tax estimate</span>
+                <span>$8.32</span>
+            </div>
+            <div class="summary-item">
+                <span>Order total</span>
+                <span>$112.32</span>
+            </div>
+            <button class="checkout-btn">Checkout</button>
+        </div>
+    </div> -->
+
+
+
+
+
+<div class="container">
+    <div class="cart-items">
         <?php if (!empty($cartItems)): ?>
             <?php foreach ($cartItems as $item): ?>
                 <div class="cart-item" data-id="<?= htmlspecialchars($item['produk_id']) ?>">
                     <div class="cart-item-content">
                         <img src="<?= htmlspecialchars($item['gambar_produk']) ?>" alt="<?= htmlspecialchars($item['nama_produk']) ?>" class="cart-item-image">
                         <div class="cart-item-details">
-                            <p class="cart-item-name"><?= htmlspecialchars($item['nama_produk']) ?> x <span class="item-quantity"><?= htmlspecialchars($item['quantity']) ?></span></p>
+                            <h3 class="cart-item-name"><?= htmlspecialchars($item['nama_produk']) ?> x <span class="item-quantity"><?= htmlspecialchars($item['quantity']) ?></span></h3>
                             <p class="cart-item-price"><?= number_format($item['harga'] * $item['quantity'], 0, ',', '.') ?> IDR</p>
                         </div>
                         <div class="cart-item-actions">
@@ -144,6 +269,11 @@ function changeQuantity(productId, newQuantity) {
 
 // Panggil fungsi untuk memperbarui tampilan keranjang saat halaman dimuat
 updateCart();
+</script>
+
+<!-- FEATHER ICONS SCRIPT -->
+<script>
+  feather.replace();
 </script>
 
 </body>

@@ -126,13 +126,13 @@ if ($isLoggedIn) {
     <section class="carousel">
       <div class="carousel-track" id="carouselTrack">
         <div class="carousel-slide">
-          <img src="https://via.placeholder.com/1200x400?text=Slide+1" alt="Slide 1" />
+          <img src="../public/img/banner_hero/banner1.png" alt="banner1" />
         </div>
         <div class="carousel-slide">
-          <img src="https://via.placeholder.com/1200x400?text=Slide+2" alt="Slide 2" />
+          <img src="../public/img/banner_hero/banner2.png" alt="banner2" />
         </div>
         <div class="carousel-slide">
-          <img src="https://via.placeholder.com/1200x400?text=Slide+3" alt="Slide 3" />
+          <img src="../public/img/banner_hero/banner3.png" alt="banner3" />
         </div>
       </div>
       <div class="carousel-nav">
@@ -142,7 +142,6 @@ if ($isLoggedIn) {
     </section>
 
 <!-- Shopping Cart Sidebar -->
-
 <div class="cart-sidebar">
     <h2>Keranjang Belanja</h2>
     <div class="cart-list">
@@ -434,6 +433,7 @@ function updateCart() {
             }
         }
     </script>
+    
 
 </body>
 </html>

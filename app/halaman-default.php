@@ -124,13 +124,13 @@
     <section class="carousel">
       <div class="carousel-track" id="carouselTrack">
         <div class="carousel-slide">
-          <img src="https://via.placeholder.com/1200x400?text=Slide+1" alt="Slide 1" />
+          <img src="../public/img/banner_hero/banner1.png" alt="banner1" />
         </div>
         <div class="carousel-slide">
-          <img src="https://via.placeholder.com/1200x400?text=Slide+2" alt="Slide 2" />
+          <img src="../public/img/banner_hero/banner2.png" alt="banner2" />
         </div>
         <div class="carousel-slide">
-          <img src="https://via.placeholder.com/1200x400?text=Slide+3" alt="Slide 3" />
+          <img src="../public/img/banner_hero/banner3.png" alt="banner3" />
         </div>
       </div>
       <div class="carousel-nav">
@@ -302,28 +302,7 @@
 
 
 
-    <!-- Navbar -->
-    <!-- <nav class="navbar">
-    <div class="navbar-brand">
-      <p href="" class="logo">
-        <span class="logored">Red</span>get.
-      </p>
-      
-    </div>
-        <div class="navbar-links">
-          <a href="../main/halaman-default.php">Home</a>
-          <a href="#">Kategori</a>
-          <a href="../Produk/produk-Default.php">Produk</a>
-          <a href="#" id="open-form-btn">Masuk/Daftar</a>
-        </div>
-    </nav>
 
-    <section class="hero">
-      <div class="hero-content">
-        <h1>Welcome to Our Website</h1>
-        <p>Your one-stop solution for gadgets and technology</p>
-      </div>
-    </section>-->
 
     
 
