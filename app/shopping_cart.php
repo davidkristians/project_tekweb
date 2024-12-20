@@ -9,20 +9,22 @@ $host = "localhost";
 $port = "5432";
 $dbname = "Web-Ecommerce";
 $dbUser = "postgres";
-$dbPassword = "postgres";
+$dbPassword = "456287";
 
 try {
-    $conn = new PDO("pgsql:host=$host;port=$port;dbname=$dbname", $dbUser , $dbPassword);
+    $conn = new PDO("pgsql:host=$host;port=$port;dbname=$dbname", $dbUser, $dbPassword);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     // Ambil item keranjang untuk pengguna yang login
     $cartItems = [];
     if ($isLoggedIn) {
-        $stmt = $conn->prepare("SELECT p.produk_id, p.nama_produk, p.harga, p.gambar_produk, c.quantity 
-                                 FROM shopping_cart c
-                                 JOIN produk p ON c.produk_id = p.produk_id
-                                 WHERE c.user_id = :user_id");
-        $stmt->bindParam(':user_id', $userId);
+        $stmt = $conn->prepare("
+            SELECT p.produk_id, p.nama_produk, p.harga, p.gambar_produk, c.quantity 
+            FROM shopping_cart c
+            JOIN produk p ON c.produk_id = p.produk_id
+            WHERE c.user_id = :user_id
+        ");
+        $stmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
         $stmt->execute();
         $cartItems = $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -38,37 +40,99 @@ try {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Keranjang Belanja</title>
     <link rel="stylesheet" href="../Produk/produk.css">
+    <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="SB-Mid-client-y7Pr6iRjBrwjlkGf"></script>
+    <style>
+        /* Modal */
+        .modal {
+            display: none; /* Sembunyikan modal secara default */
+            position: fixed;
+            z-index: 1001;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5); /* Latar belakang hitam transparan */
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%; /* Lebar modal */
+            max-width: 500px; /* Lebar maksimum modal */
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .modal-cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .modal-cart-item img {
+            max-width: 50px;
+            max-height: 50px;
+        }
+    </style>
 </head>
 <body>
-
-<div class="cart-sidebars">
-    <h2>Keranjang Belanja</h2>
-    <div class="cart-list">
-        <?php if (!empty($cartItems)): ?>
-            <?php foreach ($cartItems as $item): ?>
-                <div class="cart-item" data-id="<?= htmlspecialchars($item['produk_id']) ?>">
-                    <div class="cart-item-content">
-                        <img src="<?= htmlspecialchars($item['gambar_produk']) ?>" alt="<?= htmlspecialchars($item['nama_produk']) ?>" class="cart-item-image">
-                        <div class="cart-item-details">
-                            <p class="cart-item-name"><?= htmlspecialchars($item['nama_produk']) ?> x <span class="item-quantity"><?= htmlspecialchars($item['quantity']) ?></span></p>
-                            <p class="cart-item-price"><?= number_format($item['harga'] * $item['quantity'], 0, ',', '.') ?> IDR</p>
-                        </div>
-                        <div class="cart-item-actions">
-                            <button onclick="changeQuantity(<?= $item['produk_id'] ?>, <?= $item['quantity'] - 1 ?>)">-</button>
-                            <button onclick="changeQuantity(<?= $item['produk_id'] ?>, <?= $item['quantity'] + 1 ?>)">+</button>
+    <div class="cart-sidebars">
+        <h2>Keranjang Belanja</h2>
+        <div class="cart-list">
+            <?php if (!empty($cartItems)): ?>
+                <?php foreach ($cartItems as $item): ?>
+                    <div class="cart-item" data-id="<?= htmlspecialchars($item['produk_id']) ?>">
+                        <div class="cart-item-content">
+                            <img src="<?= htmlspecialchars($item['gambar_produk']) ?>" alt="<?= htmlspecialchars($item['nama_produk']) ?>" class="cart-item-image">
+                            <div class="cart-item-details">
+                                <p class="cart-item-name"><?= htmlspecialchars($item['nama_produk']) ?> x <span class="item-quantity"><?= htmlspecialchars($item['quantity']) ?></span></p>
+                                <p class="cart-item-price"><?= number_format($item['harga'] * $item['quantity'], 0, ',', '.') ?> IDR</p>
+                            </div>
+                            <div class="cart-item-actions">
+                                <button onclick="changeQuantity(<?= $item['produk_id'] ?>, <?= $item['quantity'] - 1 ?>)">-</button>
+                                <button onclick="changeQuantity(<?= $item['produk_id'] ?>, <?= $item['quantity'] + 1 ?>)">+</button>
+                            </div>
                         </div>
                     </div>
-                </div>
-            <?php endforeach; ?>
-        <?php else: ?>
-            <p>Keranjang belanja kosong.</p>
-        <?php endif; ?>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <p>Keranjang belanja kosong.</p>
+            <?php endif; ?>
+        </div>
+        <div class="cart-total">
+            <p>Total: <span class="total-price"><?= number_format(array_sum(array_column($cartItems, 'harga')), 0, ',', '.') ?></span> IDR</p>
+            <button class="checkout-btn">Checkout</button>
+        </div>
     </div>
-    <div class="cart-total">
-        <p>Total: <span class="total-price"><?= number_format(array_sum(array_column($cartItems, 'harga')), 0, ',', '.') ?></span> IDR</p>
-        <button class="checkout-btn">Checkout</button>
+
+    <div id="checkoutModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Konfirmasi Pesanan</h2>
+            <div id="modalCartList"></div> <!-- Kontainer daftar barang -->
+            <p>Total: <span class="total-price-modal"></span> IDR</p>
+            <button onclick="payWithMidtrans()">Confirm</button>
+            <button onclick="closeModal()">Batal</button>
+        </div>
     </div>
-</div>
+
 
 <script>
 // Inisialisasi keranjang dari PHP
@@ -144,7 +208,88 @@ function changeQuantity(productId, newQuantity) {
 
 // Panggil fungsi untuk memperbarui tampilan keranjang saat halaman dimuat
 updateCart();
+
+// Fungsi untuk membuka modal
+function openModal() {
+    const modal = document.getElementById("checkoutModal");
+    const totalPrice = document.querySelector('.total-price').textContent;
+
+    // Update total harga di modal
+    document.querySelector('.total-price-modal').textContent = totalPrice;
+
+    // Ambil elemen daftar barang dalam modal
+    const modalCartList = document.getElementById("modalCartList");
+    modalCartList.innerHTML = ''; // Kosongkan daftar sebelumnya
+
+    // Tambahkan barang ke daftar modal
+    cart.forEach(item => {
+        const itemElement = document.createElement('div');
+        itemElement.classList.add('modal-cart-item');
+        itemElement.innerHTML = `
+            <div>
+                <img src="${item.gambar_produk}" alt="${item.nama_produk}" style="width: 50px; height: 50px; margin-right: 10px;">
+                <span>${item.nama_produk} x ${item.quantity}</span>
+                <span style="float: right;">${(item.harga * item.quantity).toLocaleString()} IDR</span>
+            </div>
+        `;
+        modalCartList.appendChild(itemElement);
+    });
+
+    modal.style.display = "block"; // Tampilkan modal
+}
+
+
+// Fungsi untuk menutup modal
+function closeModal() {
+ const modal = document.getElementById("checkoutModal");
+    modal.style.display = "none";
+}
+
+function payWithMidtrans() {
+        const totalPriceElement = document.querySelector('.total-price');
+        const totalPrice = parseInt(totalPriceElement.textContent.replace(/[^0-9]/g, ''));
+
+        // Buat permintaan ke server untuk mendapatkan token
+        fetch('../configuration/midtrans_payment.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ gross_amount: totalPrice })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.token) {
+                window.snap.pay(data.token, {
+                    onSuccess: function(result) {
+                        alert('Pembayaran berhasil!');
+                        console.log(result);
+                        location.reload(); 
+                    },
+                    onPending: function(result) {
+                        alert('Pembayaran tertunda. Silakan selesaikan pembayaran.');
+                        console.log(result);
+                    },
+                    onError: function(result) {
+                        alert('Terjadi kesalahan dalam pembayaran.');
+                        console.error(result);
+                    },
+                    onClose: function() {
+                        alert('Anda menutup popup pembayaran tanpa menyelesaikannya.');
+                    }
+                });
+            } else {
+                alert('Gagal mendapatkan token pembayaran. Silakan coba lagi.');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Terjadi kesalahan saat memproses pembayaran.');
+        });
+    }
+
+document.querySelector('.checkout-btn').addEventListener('click', openModal);
 </script>
+
+
 
 </body>
 </html>

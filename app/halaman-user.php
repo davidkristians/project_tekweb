@@ -15,7 +15,7 @@
     $port = "5432";
     $dbname = "Web-Ecommerce";
     $dbUser = "postgres";
-    $dbPassword = "postgres";
+    $dbPassword = "456287";
 
     try {
         $conn = new PDO("pgsql:host=$host;port=$port;dbname=$dbname", $dbUser, $dbPassword);
@@ -47,21 +47,20 @@
 
     $cartItems = [];
 
-if ($isLoggedIn) {
-    try {
-        $userId = $_SESSION['user_id']; // Assuming user_id is stored in session
-        $stmt = $conn->prepare("SELECT p.produk_id, p.nama_produk, p.harga, p.gambar_produk, c.quantity 
-                                 FROM shopping_cart c
-                                 JOIN produk p ON c.produk_id = p.produk_id
-                                 WHERE c.user_id = :user_id");
-        $stmt->bindParam(':user_id', $userId);
-        $stmt->execute();
-        $cartItems = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    } catch (PDOException $e) {
-        echo "Error: " . $e->getMessage();
+    if ($isLoggedIn) {
+        try {
+            $userId = $_SESSION['user_id']; // Assuming user_id is stored in session
+            $stmt = $conn->prepare("SELECT p.produk_id, p.nama_produk, p.harga, p.gambar_produk, c.quantity 
+                                    FROM shopping_cart c
+                                    JOIN produk p ON c.produk_id = p.produk_id
+                                    WHERE c.user_id = :user_id");
+            $stmt->bindParam(':user_id', $userId);
+            $stmt->execute();
+            $cartItems = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        }
     }
-
-}
 ?>
 
 <!DOCTYPE html>
@@ -166,12 +165,10 @@ if ($isLoggedIn) {
             <p>Keranjang belanja kosong.</p>
         <?php endif; ?>
     </div>
-
     <div class="cart-total">
         <p>Total: <span class="total-price"><?= number_format(array_sum(array_column($cartItems, 'harga')), 0, ',', '.') ?></span> IDR</p>
         <button class="checkout-btn">Checkout</button>
     </div>
-
 </div>
 
     <!-- Produk Section -->
@@ -383,40 +380,43 @@ if ($isLoggedIn) {
         }
 
 
-function updateCart() {
-    const cartList = document.querySelector('.cart-list');
-    const totalPrice = document.querySelector('.total-price');
-    const cartCount = document.querySelector('.cart-count');
 
-    cartList.innerHTML = ''; // Clear the current cart list
-    let total = 0;
-    let count = 0;
 
-    cart.forEach(item => {
-        total += item.harga * item.quantity; // Calculate total price
-        count += item.quantity; // Count total items
 
-        const cartItem = document.createElement('div');
-        cartItem.classList.add('cart-item');
-        cartItem.innerHTML = `
-            <div class="cart-item-content">
-                <img src="${item.gambar_produk}" alt="${item.nama_produk}" class="cart-item-image">
-                <div class="cart-item-details">
-                    <p class="cart-item-name">${item.nama_produk} x ${item.quantity}</p>
-                    <p class="cart-item-price">${(item.harga * item.quantity).toLocaleString()} IDR</p>
+    function updateCart() {
+        const cartList = document.querySelector('.cart-list');
+        const totalPrice = document.querySelector('.total-price');
+        const cartCount = document.querySelector('.cart-count');
+
+        cartList.innerHTML = ''; // Clear the current cart list
+        let total = 0;
+        let count = 0;
+
+        cart.forEach(item => {
+            total += item.harga * item.quantity; // Calculate total price
+            count += item.quantity; // Count total items
+
+            const cartItem = document.createElement('div');
+            cartItem.classList.add('cart-item');
+            cartItem.innerHTML = `
+                <div class="cart-item-content">
+                    <img src="${item.gambar_produk}" alt="${item.nama_produk}" class="cart-item-image">
+                    <div class="cart-item-details">
+                        <p class="cart-item-name">${item.nama_produk} x ${item.quantity}</p>
+                        <p class="cart-item-price">${(item.harga * item.quantity).toLocaleString()} IDR</p>
+                    </div>
+                    <div class="cart-item-actions">
+                        <button onclick="changeQuantity(${item.produk_id}, ${item.quantity - 1})">-</button>
+                        <button onclick="changeQuantity(${item.produk_id}, ${item.quantity + 1})">+</button>
+                    </div>
                 </div>
-                <div class="cart-item-actions">
-                    <button onclick="changeQuantity(${item.produk_id}, ${item.quantity - 1})">-</button>
-                    <button onclick="changeQuantity(${item.produk_id}, ${item.quantity + 1})">+</button>
-                </div>
-            </div>
-        `;
-        cartList.appendChild(cartItem);
-    });
+            `;
+            cartList.appendChild(cartItem);
+        });
 
-    totalPrice.textContent = total.toLocaleString(); // Update total price
-    cartCount.textContent = count; // Update cart count
-}
+        totalPrice.textContent = total.toLocaleString(); // Update total price
+        cartCount.textContent = count; // Update cart count
+    }
 
 
 

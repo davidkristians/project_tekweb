@@ -12,7 +12,7 @@ $host = "localhost";
 $port = "5432";
 $dbname = "Web-Ecommerce";
 $dbUser = "postgres";
-$dbPassword = "postgres";
+$dbPassword = "456287";
 $message = "";
 
 try {
