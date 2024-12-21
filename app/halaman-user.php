@@ -88,7 +88,7 @@ if ($isLoggedIn) {
     <!-- CSS UNTUK SEMUA HALAMAN -->
     <link rel="stylesheet" href="../public/css/style.css">
     <!-- CSS KHUSUS UNTUK HALAMAN INI -->
-    <link rel="stylesheet" href="../app/halaman-default-baru.css">
+    <link rel="stylesheet" href="../app/halaman-default-baru-2.css">
     <link rel="stylesheet" href="../Produk/produk.css">
 </head>
 
@@ -122,6 +122,10 @@ if ($isLoggedIn) {
       </div>
     </nav>
 
+
+
+
+
     <!--=====HERO MODIFIED FIXED=====-->
     <section class="carousel">
       <div class="carousel-track" id="carouselTrack">
@@ -141,15 +145,19 @@ if ($isLoggedIn) {
       </div>
     </section>
 
-<!-- Shopping Cart Sidebar -->
-<div class="cart-sidebar">
-    <h2>Keranjang Belanja</h2>
-    <div class="cart-list">
-        <?php if (!empty($cartItems)): ?>
-            <?php foreach ($cartItems as $item): ?>
-                <div class="cart-item">
-                    <div class="cart-item-content">
-                        <img src="<?= htmlspecialchars($item['gambar_produk']) ?>" alt="<?= htmlspecialchars($item['nama_produk']) ?>" class="cart-item-image">
+
+
+
+
+    <!-- SHOPPING CART SIDEBAR -->
+    <div class="cart-sidebar">
+        <h2>Keranjang Belanja</h2>
+        <div class="cart-list">
+            <?php if (!empty($cartItems)): ?>
+                <?php foreach ($cartItems as $item): ?>
+                    <div class="cart-item">
+                        <div class="cart-item-content">
+                            <img src="<?= htmlspecialchars($item['gambar_produk']) ?>" alt="<?= htmlspecialchars($item['nama_produk']) ?>" class="cart-item-image">
                         <div class="cart-item-details">
                             <p class="cart-item-name"><?= htmlspecialchars($item['nama_produk']) ?> x <?= htmlspecialchars($item['quantity']) ?></p>
                             <p class="cart-item-price"><?= number_format($item['harga'] * $item['quantity'], 0, ',', '.') ?> IDR</p>
@@ -165,16 +173,21 @@ if ($isLoggedIn) {
             <p>Keranjang belanja kosong.</p>
         <?php endif; ?>
     </div>
-
     <div class="cart-total">
         <p>Total: <span class="total-price"><?= number_format(array_sum(array_column($cartItems, 'harga')), 0, ',', '.') ?></span> IDR</p>
         <button class="checkout-btn">Checkout</button>
     </div>
-
 </div>
 
-    <!-- Produk Section -->
+
+
+
+
+    <!-- PRODUCT FIXED MODIFIED -->
     <?php if (!empty($produkData)): ?>
+    <section class="produk_kami">
+        <h1>Belanja Sekarang</h1>
+    </section>
     <section class="products">
         <?php foreach ($produkData as $produk): ?>
             <div class="card">
@@ -193,6 +206,8 @@ if ($isLoggedIn) {
     <?php endif; ?>
     </section>
     
+
+
 
 
     <!--=====FOOTER MODIFIED FIXED=====-->
@@ -218,7 +233,9 @@ if ($isLoggedIn) {
 
     
 
-    <!-- Pop-up -->
+
+
+    <!-- TOAST SELAMAT DATANG -->
     <?php if ($isLoggedIn): ?>
     <div class="toast-container position-fixed bottom-0 end-0 p-3" id="toast-container">
         <div class="toast align-items-center text-bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
@@ -232,6 +249,9 @@ if ($isLoggedIn) {
     </div>
     <?php endif; ?>
 
+
+
+    
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -387,13 +407,13 @@ function updateCart() {
     const totalPrice = document.querySelector('.total-price');
     const cartCount = document.querySelector('.cart-count');
 
-    cartList.innerHTML = ''; // Clear the current cart list
+    cartList.innerHTML = '';
     let total = 0;
     let count = 0;
 
     cart.forEach(item => {
-        total += item.harga * item.quantity; // Calculate total price
-        count += item.quantity; // Count total items
+        total += item.harga * item.quantity; // INCREMENT TOTAL HARGA
+        count += item.quantity; // INCREMENT JUMLAH KERANJANG
 
         const cartItem = document.createElement('div');
         cartItem.classList.add('cart-item');
@@ -413,8 +433,8 @@ function updateCart() {
         cartList.appendChild(cartItem);
     });
 
-    totalPrice.textContent = total.toLocaleString(); // Update total price
-    cartCount.textContent = count; // Update cart count
+    totalPrice.textContent = total.toLocaleString(); // UPDATE TOTAL HARGA
+    cartCount.textContent = count; // UPDATE JUMLAH KERANJANG
 }
 
 
@@ -423,17 +443,15 @@ function updateCart() {
             let cartItem = cart.find(c => c.produk_id == id);
             if (cartItem) {
                 if (quantity <= 0) {
-                    // Remove item from cart if quantity is 0 or less
+                    // HAPUS BARANG JIKA JUMLAH 0
                     cart = cart.filter(c => c.produk_id != id);
                 } else {
-                    // Update the quantity
+                    // UPDATE JUMLAH KERANJANG
                     cartItem.quantity = quantity;
                 }
-                updateCart(); // Update the cart display
+                updateCart();
             }
         }
     </script>
-    
-
 </body>
 </html>

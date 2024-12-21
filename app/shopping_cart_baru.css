@@ -9,6 +9,10 @@ body {
   line-height: 1.6;
 }
 
+
+
+
+
 /* BAGIAN NAVBAR */
 .navbar {
   overflow: hidden;
@@ -55,6 +59,10 @@ body {
   margin-left: 1rem;
   cursor: pointer;
 }
+
+
+
+
 
 /* BAGIAN KERANJANG SAYA */
 .judul_keranjang_saya {
@@ -171,4 +179,105 @@ body {
 }
 .status .delayed {
   color: #dc3545;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* MEDIA QUERIES KETIKA DI LAPTOP */
+@media (max-width: 1366px) {
+  /* BAGIAN NAVBAR */
+  .navbar_contents .nav-links a {
+      text-decoration: none;
+      color: #333;
+      font-size: 15px;
+    }
+
+  /* BAGIAN FOOTER */
+  .footer-container {
+      display: flex;
+      justify-content: space-between;
+      margin: 10rem 20rem;
+    }
+
+    .footer-container h1{
+      margin-left: 1rem;
+    }
+
+  .logo {
+      width: 150px;
+    }
+
+    .deskripsi {
+      width: 50rem;
+      align-items: center;
+      margin: auto;
+      font-size: 20px;
+      text-align: justify;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      border-top: 1px solid #c7c7c7;
+      font-size: 15px;
+      color: black;
+    }
+
+    .footer-bottom p {
+      margin: 2rem 0rem;
+    }
+
+
+  /* BAGIAN FORM REGISTRASI/LOGIN */
+  .form-container {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: rgba(255, 255, 255, 1);
+      padding: 30px;
+      border-radius: 10px;
+      width: 500px; /* Lebih lebar */
+      max-width: 100%;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      z-index: 9999;
+      display: none;
+    }
+
+    .tabs div {
+      font-size: 1rem;
+      width: 80px;
+      padding: 0.2rem 0.5rem;
+      cursor: pointer;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+    }
+    
+    .form-container input {
+      width: 100%;
+      padding: 0.3rem 1rem;
+      font-size: 1rem;
+      border: 2px solid #ddd;
+      border-radius: 5px;
+      outline: none;
+      transition: border 0.3s;
+    }
+
+    .form-container .input-box{
+      border: 1px solid #7777779a;
+      padding: 0.3rem 1rem;
+      margin-bottom: 1.5rem;
+    }
 }

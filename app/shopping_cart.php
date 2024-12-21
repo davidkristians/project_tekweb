@@ -55,7 +55,7 @@ try {
     <!-- CSS UNTUK SEMUA HALAMAN -->
     <link rel="stylesheet" href="../public/css/style.css">
     <!-- CSS KHUSUS UNTUK HALAMAN INI -->
-    <link rel="stylesheet" href="../app/shopping_cart_baru.css">
+    <link rel="stylesheet" href="../app/shopping_cart_baru_2.css">
     <!-- <link rel="stylesheet" href="../Produk/produk.css"> -->
 </head>
 
@@ -84,84 +84,84 @@ try {
       </div>
     </nav>
 
+
+
+
+
     <!-- BAGIAN BODY KERANJANG SAYA -->
-    <!-- <h2 class="judul_keranjang_saya">Keranjang Saya</h2>
+    <h2 class="judul_keranjang_saya">Keranjang Saya</h2>
     <div class="container">
         <div class="cart-items">
             <div class="cart-item">
-                <img src="sienna-tshirt.jpg" alt="Basic Tee Sienna">
+                <img src="../public/img/barang/jpg/iphone_13_pro_max.jpg" alt="Basic Tee Sienna">
                 <div class="item-details">
-                    <h3>Basic Tee</h3>
-                    <p>Sienna | Large</p>
-                    <p class="status in-stock">✔ In stock</p>
+                    <h3>iPhone 14</h3>
+                    <p>Bagus</p>
+                    <p class="status in-stock">Baru</p>
                 </div>
                 <div class="item-quantity">
-                    <label for="qty1">Qty:</label>
+                    <label for="qty1">Jumlah</label>
                     <select id="qty1">
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
                     </select>
                 </div>
-                <p class="item-price"></p>
+                <p class="item-price">Rp 14.000.000</p>
             </div>
             <div class="cart-item">
-                <img src="black-tshirt.jpg" alt="Basic Tee Black">
+                <img src="../public/img/barang/jpg/iphone_13_pro_max.jpg" alt="Basic Tee Black">
                 <div class="item-details">
-                    <h3>Basic Tee</h3>
-                    <p>Black | Large</p>
-                    <p class="status delayed">Ships in 3–4 weeks</p>
+                    <h3>Iphone 13 Pro Max</h3>
+                    <p>Kondisi mulus 100%, charger lengkap. Warna biru.</p>
+                    <p class="status delayed">90%</p>
                 </div>
                 <div class="item-quantity">
-                    <label for="qty2">Qty:</label>
+                    <label for="qty2">Jumlah</label>
                     <select id="qty2">
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
                     </select>
                 </div>
-                <p class="item-price">$32.00</p>
+                <p class="item-price">Rp 10.000.000</p>
             </div>
             <div class="cart-item">
-                <img src="tumbler.jpg" alt="Nomad Tumbler">
+                <img src="../public/img/barang/jpg/samsung_z_flip.jpg" alt="Nomad Tumbler">
                 <div class="item-details">
-                    <h3>Nomad Tumbler</h3>
-                    <p>White</p>
-                    <p class="status in-stock">✔ In stock</p>
+                    <h3>Samsung Z-Flip</h3>
+                    <p>Kondisi mulus 100%, tidak ada lecet. Warna biru.</p>
+                    <p class="status in-stock">90%</p>
                 </div>
                 <div class="item-quantity">
-                    <label for="qty3">Qty:</label>
+                    <label for="qty3">Jumlah</label>
                     <select id="qty3">
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
                     </select>
                 </div>
-                <p class="item-price">$35.00</p>
+                <p class="item-price">Rp 13.000.000</p>
             </div>
         </div>
 
         <div class="order-summary">
-            <h3>Order Summary</h3>
+            <h3>Total Harga</h3>
             <div class="summary-item">
                 <span>Subtotal</span>
-                <span>$99.00</span>
+                <span>Rp 37.000.000</span>
             </div>
             <div class="summary-item">
-                <span>Shipping estimate</span>
-                <span>$5.00</span>
+                <span>Biaya Pengiriman</span>
+                <span>Rp 200.000</span>
             </div>
-            <div class="summary-item">
-                <span>Tax estimate</span>
-                <span>$8.32</span>
-            </div>
-            <div class="summary-item">
+            <div class="summary-item order-total">
                 <span>Order total</span>
-                <span>$112.32</span>
+                <span>Rp 37.200.000</span>
             </div>
             <button class="checkout-btn">Checkout</button>
         </div>
-    </div> -->
+    </div>
 
 
 
@@ -194,6 +194,32 @@ try {
         <button class="checkout-btn">Checkout</button>
     </div>
 </div>
+
+
+
+
+
+<!--=====FOOTER MODIFIED FIXED=====-->
+<footer>
+  <div class="footer-container">
+    <div class="footer-left">
+      <div class="logo">
+        <img src="../public/img/logo/redget_logo.png" alt="">
+      </div>
+    </div>
+
+    <div class="deskripsi">
+    <h1>
+  <p class="typewrite" data-period="2000" data-type='[ "adalah Platform Jual Beli Barang Bekas Berkualitas Tinggi.", "adalah tempat menemukan gadget impian dengan harga murah!", "adalah Platform Jual Beli Barang Bekas Berkualitas Tinggi.", "adalah tempat menemukan gadget impian dengan harga murah!" ]'>
+    <span class="wrap"></span>
+  </p>
+</h1>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p><i class="bi bi-c-circle"></i> Redget 2024 | Hak Cipta Dilindungi</p>
+  </div>
+</footer>
 
 <script>
 // Inisialisasi keranjang dari PHP

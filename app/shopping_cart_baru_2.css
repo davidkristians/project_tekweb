@@ -9,13 +9,21 @@
     line-height: 1.6;
   }
   
+  
+  
+  
+  
   /* BAGIAN NAVBAR */
   .navbar {
+    overflow: hidden;
+    position: sticky;
+    top: 0;
     justify-content: center;
     align-items: center;
     padding: 2rem 5rem;
     background-color: #f8f8f8;
     border-bottom: 1px solid #777777;
+    z-index: 1;
   }
   
   .navbar .navbar_contents .logo {
@@ -51,110 +59,133 @@
     margin-left: 1rem;
     cursor: pointer;
   }
-
-  /* ======================================= */
-  /* ==========FORM BAGIAN PEMBELI========== */
-  /* ======================================= */
-  /* BAGIAN FORMULIR EDIT */
-  .profile {
-    letter-spacing: 1px;
-    max-width: 1240px;
-    margin: 60px auto 100px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 20px;
-    box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.288);
-    padding: 20px 30px;
-    text-align: center;
-}
-
-/* JUDUL PENGISIAN FORM*/
-.profile h2 {
-    font-size: 35px;
-    color: black;
-    margin-bottom: 20px;
-    display: inline-block;
-    padding-bottom: 5px;
-}
-
-.profile form div {
-    font-size: 20px;
-    margin-bottom: 15px;
-    text-align: left;
-}
-
-.profile label {
-    display: block;
-    font-weight: bold;
-    color: black;
-}
-
-.profile input,
-.profile textarea {
-    width: 100%;
-    padding: 10px;
-    border: 2px solid rgb(255, 255, 255);
-    border-radius: 10px;
-    background: #ebebeb;
-    color: black;
-}
-
-.profile button {
-    background: #000000;
-    color: white;
-    font-size: 20px;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 15px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    margin: 10px 0;
-}
-
-.profile .del-or-log-out {
+  
+  
+  
+  
+  
+  /* BAGIAN KERANJANG SAYA */
+  .judul_keranjang_saya {
+      font-size: 30px;
+      text-align: center;
+      margin: 2rem auto;
+  }
+  
+  .container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 20px auto;
     display: flex;
-    justify-content: flex-end;
-}
-
-/* CUSTOM TOMBOL LOGOUT */
-.profile .del-or-log-out .logout-btn {
-    background: #000000;
-    color: white;
+    gap: 20px;
+  }
+  .cart-items {
+    flex: 2;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  .cart-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eee;
+  }
+  .cart-item:last-child {
+    border-bottom: none;
+  }
+  .cart-item img {
+    width: 100px;
+    height: auto;
+    border-radius: 8px;
+  }
+  .item-details {
+    flex: 1;
+    margin-left: 20px;
+  }
+  .item-details h3 {
+    margin: 0 0 5px;
+    font-size: 18px;
+  }
+  .item-details p {
+    margin: 5px 0;
+    color: #555;
+  }
+  .item-quantity {
+    display: flex;
+    align-items: center;
+  }
+  .item-quantity select {
+    padding: 5px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    margin-left: 10px;
+  }
+  .item-price {
+    font-size: 16px;
+    font-weight: bold;
+  }
+  .order-summary {
+    flex: 1;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  .order-summary h3 {
+    margin-bottom: 20px;
     font-size: 20px;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 15px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    margin-right: 1rem;
-}
-
-/* CUSTOM TOMBOL HAPUS AKUN */
-.profile .del-or-log-out .delete-acc-btn {
-    background: #920000;
+  }
+  .summary-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  .summary-item:last-child {
+    font-weight: bold;
+    font-size: 18px;
+  }
+  .checkout-btn {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    text-align: center;
+    background: #5c3dff;
     color: white;
-    font-size: 20px;
     border: none;
-    padding: 10px 20px;
-    border-radius: 15px;
+    border-radius: 5px;
+    font-size: 16px;
     cursor: pointer;
-    transition: all 0.3s ease;
-    margin-right: 1rem;
-}
-
-.profile button:hover {
-    background: #f1c40f;
-    transform: scale(1.05);
-}
-
-.profile p {
     margin-top: 20px;
-    color: #f5f5f5;
-    font-style: italic;
-}
+  }
+  .checkout-btn:hover {
+    background: #4a33cc;
+  }
+  .status {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    color: #666;
+    margin-top: 10px;
+  }
+  .status span {
+    margin-left: 5px;
+    font-size: 12px;
+  }
+  .status .in-stock {
+    color: #28a745;
+  }
+  .status .delayed {
+    color: #dc3545;
+  }
 
 
-/* BAGIAN FOOTER */
-footer {
+
+
+  /* BAGIAN FOOTER */
+  footer {
     background-color: #ffffff;
     color: black;
     font-family: Arial, sans-serif;
@@ -169,17 +200,11 @@ footer {
   .footer-container {
     display: flex;
     justify-content: space-between;
-    margin: 10rem 25rem;
+    margin: 10rem 10rem;
   }
   
   .footer-left {
     max-width: 300px;
-  }
-  
-  .social-icons a {
-    display: inline-block;
-    margin: 0rem 1rem 2rem 0rem ;
-    color: black;
   }
   
   .deskripsi {
@@ -200,15 +225,19 @@ footer {
   .footer-bottom p {
     margin: 3rem 0rem;
   }
-
-
-
-
-
-
-
-
-
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   /* MEDIA QUERIES KETIKA DI LAPTOP */
   @media (max-width: 1366px) {
     /* BAGIAN NAVBAR */
@@ -217,22 +246,22 @@ footer {
         color: #333;
         font-size: 15px;
       }
-
+  
     /* BAGIAN FOOTER */
     .footer-container {
         display: flex;
         justify-content: space-between;
         margin: 10rem 20rem;
       }
-
+  
       .footer-container h1{
         margin-left: 1rem;
       }
-
+  
     .logo {
         width: 150px;
       }
-
+  
       .deskripsi {
         width: 50rem;
         align-items: center;
@@ -240,23 +269,19 @@ footer {
         font-size: 20px;
         text-align: justify;
       }
-
+  
       .footer-bottom {
         text-align: center;
         border-top: 1px solid #c7c7c7;
         font-size: 15px;
         color: black;
       }
-
+  
       .footer-bottom p {
         margin: 2rem 0rem;
       }
-
-
-
-
-
-
+  
+  
     /* BAGIAN FORM REGISTRASI/LOGIN */
     .form-container {
         position: fixed;
@@ -272,7 +297,7 @@ footer {
         z-index: 9999;
         display: none;
       }
-
+  
       .tabs div {
         font-size: 1rem;
         width: 80px;
@@ -280,7 +305,7 @@ footer {
         cursor: pointer;
         transition: background-color 0.3s, color 0.3s;
       }
-
+  
       .form-group {
         margin-bottom: 1rem;
       }
@@ -294,10 +319,10 @@ footer {
         outline: none;
         transition: border 0.3s;
       }
-
+  
       .form-container .input-box{
         border: 1px solid #7777779a;
         padding: 0.3rem 1rem;
         margin-bottom: 1.5rem;
       }
-}
+  }

@@ -91,7 +91,7 @@
     <!-- CSS UNTUK SEMUA HALAMAN -->
     <link rel="stylesheet" href="../public/css/style.css">
     <!-- CSS KHUSUS UNTUK HALAMAN INI -->
-    <link rel="stylesheet" href="../app/halaman-default-baru.css">
+    <link rel="stylesheet" href="../app/halaman-default-baru-2.css">
   </head>
 
   <!-- FEATHER ICON -->
@@ -120,6 +120,10 @@
       </div>
     </nav>
 
+
+
+
+
     <!--=====HERO MODIFIED FIXED=====-->
     <section class="carousel">
       <div class="carousel-track" id="carouselTrack">
@@ -139,8 +143,15 @@
       </div>
     </section>
 
+    
 
+
+
+    <!-- PRODUK FIXED MODIFIED -->
     <?php if (!empty($produkData)): ?>
+    <section class="produk_kami">
+      <h1>Belanja Sekarang</h1>
+    </section>
     <section class="products">
         <?php foreach ($produkData as $produk): ?>
             <div class="card">
@@ -159,72 +170,8 @@
     <?php endif; ?>
 
 
+    
 
-    <!--=====PRODUCT MODIFIED FIXED=====-->
-    <!-- <div class="produk_kami">
-      <h1>Pilih Barang Anda</h1>
-    </div>
-    <section class="products">
-      <div class="card">
-        <img src="../public/img/barang/jpg/iphone_13_pro_max.jpg" alt="Basic Tee 8-Pack" />
-        <div class="judul_deskripsi_harga">
-          <h3>Iphone 13 pro max</h3>
-          <p>kondisi mulus 100%, charger lengkap</p>
-          <p><em>warna biru</em></p>
-          <div class="price">Rp 10,000,000</div>
-        </div>
-      </div>
-
-      <div class="card">
-        <img src="../public/img/barang/jpg/samsung_z_flip.jpg" alt="Basic Tee" />
-        <div class="judul_deskripsi_harga">
-          <h3>Samsung Z-Flip</h3>
-          <p>Kondisi mulus 100%, tidak ada lecet</p>
-          <p><em>warna biru</em></p>
-          <div class="price">Rp 13,000,000</div>
-        </div>
-      </div>
-
-      <div class="card">
-        <img src="../public/img/barang/jpg/zephyrus_duo.jpg" alt="Kinda White Basic Tee" />
-        <div class="judul_deskripsi_harga">
-          <h3>laptop ROG Zephyrus Duo</h3>
-          <p>Kondisi mulus, masih bisa untuk gaming, charger lengkap, ada screen protector</p>
-          <p><em>warna hitam</em></p>
-          <div class="price">Rp 15,000,000</div>
-        </div>
-      </div>
-
-      <div class="card">
-        <img src="../public/img/barang/jpg/tv_samsung_43.jpg" alt="Stone Basic Tee" />
-        <div class="judul_deskripsi_harga">
-          <h3>TV Samsung 43 inch</h3>
-          <p>kondisi masih mulus, pemakaian 1 tahun, alasan ganti : mau beli tv baru</p>
-          <p><em>ukuran 43 inch</em></p>
-          <div class="price">Rp 5,000,000</div>
-        </div>
-      </div>
-
-      <div class="card">
-        <img src="../public/img/barang/jpg/apple_watch_se.jpg" alt="Fall Basic Tee 3-Pack" />
-        <div class="judul_deskripsi_harga">
-          <h3>apple watch SE</h3>
-          <p>kondisi masih mulus, tidak ada lecet, alasan ganti : mau ganti ke apple watch series 9</p>
-          <p><em>warna pink</em></p>
-          <div class="price">Rp 2,000,000</div>
-        </div>
-      </div>
-
-      <div class="card">
-        <img src="../public/img/barang/jpg/vivo_v40.jpg" alt="Linework Artwork Tee 3-Pack" />
-        <div class="judul_deskripsi_harga">
-          <h3>HP Vivo V40</h3>
-          <p>Kondisi masih bagus, mines lecet di bagian dekat charger</p>
-          <p><em>warna silver</em></p>
-          <div class="price">Rp 4,500,000</div>
-        </div>
-        </div>
-    </section> -->
 
     <!--=====FOOTER MODIFIED FIXED=====-->
 <footer>
@@ -249,8 +196,9 @@
 </footer>
 
 
-<div id="overlay" class="overlay"></div>
+
 <!-- FORM SECTION (REGISTER/LOGIN) -->
+<div id="overlay" class="overlay"></div>
     <div id="form-container" class="form-container">
       <h2 id="form-title">Buat Akun</h2>
       <div class="tabs">
@@ -258,7 +206,7 @@
         <div id="login-tab" onclick="toggleForm('login')">Login</div>
       </div>
 
-      <!-- Register Form -->
+      <!-- REGISTER FORM -->
         <form id="register-form" class="form-content" action="#" method="POST">
           <div class="form-group">
             <input type="text" placeholder="Nama Lengkap" name="nama" required>
@@ -288,7 +236,7 @@
           <button type="submit" id="submit">Register</button>
       </form>
 
-    <!-- Login Form -->
+    <!-- LOGIN FORM -->
       <form id="login-form" class="form-content" action="login.php" method="POST" style="display: none;">
           <div class="form-group">
               <input type="email" name="email" placeholder="Email Address" required>
@@ -302,41 +250,7 @@
 
 
 
-
-
-    
-
-    <!-- <section class="about" id="about">
-      <h1 class="heading"> <span>About</span> us </h1>
-      <div class="content">
-        <h3>Mengapa memilih ReTech?</h3>
-        <p>Kami hadir untuk memenuhi kebutuhan belanja alat elektronik Anda dengan menyediakan berbagai macam produk berkualitas tinggi. Mulai dari HP dengan fitur canggih, 
-          laptop yang tangguh untuk produktivitas kerja dan belajar, 
-          tablet yang praktis untuk hiburan dan mobilitas, hingga beragam perangkat elektronik lainnya yang dirancang 
-          untuk memudahkan kehidupan modern Anda. Kami memahami bahwa teknologi bukan hanya sekadar alat, 
-          tetapi juga menjadi bagian penting dalam mendukung aktivitas sehari-hari, mulai dari belajar, bekerja, hingga
-          menikmati hiburan. Dengan koleksi produk yang selalu diperbarui, kami berusaha memastikan bahwa Anda selalu memiliki akses 
-          ke teknologi terkini sesuai kebutuhan dan keinginan Anda.</p>
-        <p>Kami juga menyadari bahwa setiap individu, terutama mahasiswa, sering kali menghadapi tantangan dalam mengelola anggaran mereka. Oleh karena itu, 
-          kami memberikan penawaran harga yang sangat terjangkau dan bersahabat, tanpa mengurangi kualitas dari produk yang ditawarkan. Harga yang kami tawarkan 
-          dirancang dengan mempertimbangkan kebutuhan pelanggan, sehingga siapa pun, termasuk mahasiswa dengan anggaran terbatas, 
-          tetap bisa mendapatkan perangkat elektronik berkualitas untuk menunjang aktivitas mereka.</p>
-        <p>Selain produk dan harga yang menarik, kami juga berkomitmen untuk memberikan pengalaman belanja yang nyaman dan memuaskan. Dengan layanan pelanggan 
-            yang ramah dan profesional, kami siap membantu Anda menemukan produk yang paling sesuai dengan kebutuhan Anda. Tidak hanya itu, kami juga menyediakan 
-            berbagai promo dan diskon menarik agar Anda bisa mendapatkan produk impian Anda dengan harga yang lebih hemat.</p>
-        <p>Dengan berbelanja di tempat kami, Anda tidak hanya mendapatkan produk berkualitas, tetapi juga solusi yang dapat membantu Anda menjalani kehidupan yang lebih 
-          praktis, efisien, dan menyenangkan. Kami percaya bahwa dengan dukungan perangkat elektronik yang tepat, Anda dapat mencapai lebih banyak hal, baik dalam hal 
-          pendidikan, karier, maupun kegiatan sehari-hari. Temukan segala kebutuhan elektronik Anda bersama kami dan jadilah bagian dari pelanggan yang puas dengan pelayanan 
-          terbaik yang kami tawarkan.</p>
-      </div>
-    </section> -->
-
     <div class="spacer"></div>
-
-
-
-
-
     <!-- JavaScript for toggle between register and login -->
     <script>
             // Menampilkan form dan overlay ketika tombol Daftar/Masuk ditekan
@@ -377,8 +291,6 @@
         }
       }
     </script>
-
-
 
 
 <!-- FEATHER ICONS SCRIPT -->
