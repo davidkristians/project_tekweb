@@ -3,7 +3,7 @@ session_start();
 
 // Pastikan pengguna sudah login
 if (!isset($_SESSION['user_id'])) {
-    echo json_encode(['success' => false, 'message' => 'User not logged in']);
+    echo json_encode(['success' => false, 'message' => 'User  not logged in']);
     exit();
 }
 
@@ -19,12 +19,31 @@ if (isset($data['user_id'], $data['produk_id'], $data['quantity'])) {
     $host = "localhost";
     $port = "5432";
     $dbname = "Web-Ecommerce";
-    $dbUser = "postgres";
-    $dbPassword = "postgres";
+    $dbUser  = "postgres";
+    $dbPassword = "456287";
 
     try {
-        $conn = new PDO("pgsql:host=$host;port=$port;dbname=$dbname", $dbUser, $dbPassword);
+        $conn = new PDO("pgsql:host=$host;port=$port;dbname=$dbname", $dbUser , $dbPassword);
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        // Ambil stok produk dari tabel produk
+        $stmt = $conn->prepare("SELECT jumlah_stock FROM produk WHERE produk_id = :produk_id");
+        $stmt->bindParam(':produk_id', $produk_id);
+        $stmt->execute();
+        $product = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if (!$product) {
+            echo json_encode(['success' => false, 'message' => 'Produk tidak ditemukan']);
+            exit();
+        }
+
+        $stok = $product['jumlah_stock'];
+
+        // Validasi jumlah yang dimasukkan
+        if ($quantity > $stok) {
+            echo json_encode(['success' => false, 'message' => 'Jumlah melebihi stok yang tersedia']);
+            exit();
+        }
 
         // Cek apakah produk sudah ada dalam keranjang
         $stmt = $conn->prepare("SELECT * FROM shopping_cart WHERE user_id = :user_id AND produk_id = :produk_id");
