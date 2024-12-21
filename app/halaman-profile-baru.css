@@ -1,0 +1,303 @@
+/* BAGIAN KESELURUHAN */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    line-height: 1.6;
+  }
+  
+  /* BAGIAN NAVBAR */
+  .navbar {
+    justify-content: center;
+    align-items: center;
+    padding: 2rem 5rem;
+    background-color: #f8f8f8;
+    border-bottom: 1px solid #777777;
+  }
+  
+  .navbar .navbar_contents .logo {
+    width: 100px;
+  }
+  
+  .navbar_contents {
+    width: 1200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem auto;
+    margin: 0rem 4rem;
+  }
+  
+  .navbar_contents .nav-links {
+    display: flex;
+    list-style: none;
+  }
+  
+  .navbar_contents .nav-links li {
+    margin: 0 1rem;
+  }
+  
+  .navbar_contents .nav-links a {
+    text-decoration: none;
+    color: #333;
+    font-size: 20px;
+  }
+  
+  .navbar_contents .nav-icons a {
+    display: inline-flex;
+    margin-left: 1rem;
+    cursor: pointer;
+  }
+
+  /* ======================================= */
+  /* ==========FORM BAGIAN PEMBELI========== */
+  /* ======================================= */
+  /* BAGIAN FORMULIR EDIT */
+  .profile {
+    letter-spacing: 1px;
+    max-width: 1240px;
+    margin: 60px auto 100px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.288);
+    padding: 20px 30px;
+    text-align: center;
+}
+
+/* JUDUL PENGISIAN FORM*/
+.profile h2 {
+    font-size: 35px;
+    color: black;
+    margin-bottom: 20px;
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+.profile form div {
+    font-size: 20px;
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.profile label {
+    display: block;
+    font-weight: bold;
+    color: black;
+}
+
+.profile input,
+.profile textarea {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid rgb(255, 255, 255);
+    border-radius: 10px;
+    background: #ebebeb;
+    color: black;
+}
+
+.profile button {
+    background: #000000;
+    color: white;
+    font-size: 20px;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 10px 0;
+}
+
+.profile .del-or-log-out {
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* CUSTOM TOMBOL LOGOUT */
+.profile .del-or-log-out .logout-btn {
+    background: #000000;
+    color: white;
+    font-size: 20px;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-right: 1rem;
+}
+
+/* CUSTOM TOMBOL HAPUS AKUN */
+.profile .del-or-log-out .delete-acc-btn {
+    background: #920000;
+    color: white;
+    font-size: 20px;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-right: 1rem;
+}
+
+.profile button:hover {
+    background: #f1c40f;
+    transform: scale(1.05);
+}
+
+.profile p {
+    margin-top: 20px;
+    color: #f5f5f5;
+    font-style: italic;
+}
+
+
+/* BAGIAN FOOTER */
+footer {
+    background-color: #ffffff;
+    color: black;
+    font-family: Arial, sans-serif;
+    border-top: 1px solid #777777;
+    font-family: 'Poppins';
+  }
+  
+  .logo {
+    width: 250px;
+  }
+  
+  .footer-container {
+    display: flex;
+    justify-content: space-between;
+    margin: 10rem 25rem;
+  }
+  
+  .footer-left {
+    max-width: 300px;
+  }
+  
+  .social-icons a {
+    display: inline-block;
+    margin: 0rem 1rem 2rem 0rem ;
+    color: black;
+  }
+  
+  .deskripsi {
+    width: 50rem;
+    align-items: center;
+    margin: auto;
+    font-size: 28px;
+    text-align: justify;
+  }
+  
+  .footer-bottom {
+    text-align: center;
+    border-top: 1px solid #c7c7c7;
+    font-size: 20px;
+    color: black;
+  }
+  
+  .footer-bottom p {
+    margin: 3rem 0rem;
+  }
+
+
+
+
+
+
+
+
+
+  /* MEDIA QUERIES KETIKA DI LAPTOP */
+  @media (max-width: 1366px) {
+    /* BAGIAN NAVBAR */
+    .navbar_contents .nav-links a {
+        text-decoration: none;
+        color: #333;
+        font-size: 15px;
+      }
+
+    /* BAGIAN FOOTER */
+    .footer-container {
+        display: flex;
+        justify-content: space-between;
+        margin: 10rem 20rem;
+      }
+
+      .footer-container h1{
+        margin-left: 1rem;
+      }
+
+    .logo {
+        width: 150px;
+      }
+
+      .deskripsi {
+        width: 50rem;
+        align-items: center;
+        margin: auto;
+        font-size: 20px;
+        text-align: justify;
+      }
+
+      .footer-bottom {
+        text-align: center;
+        border-top: 1px solid #c7c7c7;
+        font-size: 15px;
+        color: black;
+      }
+
+      .footer-bottom p {
+        margin: 2rem 0rem;
+      }
+
+
+
+
+
+
+    /* BAGIAN FORM REGISTRASI/LOGIN */
+    .form-container {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: rgba(255, 255, 255, 1);
+        padding: 30px;
+        border-radius: 10px;
+        width: 500px; /* Lebih lebar */
+        max-width: 100%;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        z-index: 9999;
+        display: none;
+      }
+
+      .tabs div {
+        font-size: 1rem;
+        width: 80px;
+        padding: 0.2rem 0.5rem;
+        cursor: pointer;
+        transition: background-color 0.3s, color 0.3s;
+      }
+
+      .form-group {
+        margin-bottom: 1rem;
+      }
+      
+      .form-container input {
+        width: 100%;
+        padding: 0.3rem 1rem;
+        font-size: 1rem;
+        border: 2px solid #ddd;
+        border-radius: 5px;
+        outline: none;
+        transition: border 0.3s;
+      }
+
+      .form-container .input-box{
+        border: 1px solid #7777779a;
+        padding: 0.3rem 1rem;
+        margin-bottom: 1.5rem;
+      }
+}

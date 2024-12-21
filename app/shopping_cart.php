@@ -45,98 +45,181 @@ try {
         <!-- GOOGLE FONTS -->
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-    <style>
-        /* Modal */
-        .modal {
-            display: none; /* Sembunyikan modal secara default */
-            position: fixed;
-            z-index: 1001;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0, 0, 0, 0.5); /* Latar belakang hitam transparan */
-        }
 
-        .modal-content {
-            background-color: #fefefe;
-            margin: 15% auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%; /* Lebar modal */
-            max-width: 500px; /* Lebar maksimum modal */
-        }
+    <!-- BOOTSTRAP -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
+    <!-- BOOTSTRAP ICON -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-        }
+    <!-- TAILWIND -->
+    <script src="https://cdn.tailwindcss.com"></script>
 
-        .close:hover,
-        .close:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
-        }
-        .modal-cart-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-            padding: 10px;
-            border-bottom: 1px solid #ccc;
-        }
-
-        .modal-cart-item img {
-            max-width: 50px;
-            max-height: 50px;
-        }
-    </style>
+    <!-- CSS UNTUK SEMUA HALAMAN -->
+    <link rel="stylesheet" href="../public/css/style.css">
+    <!-- CSS KHUSUS UNTUK HALAMAN INI -->
+    <link rel="stylesheet" href="../app/shopping_cart_baru_2.css">
+    <!-- <link rel="stylesheet" href="../Produk/produk.css"> -->
 </head>
 <body>
-    <div class="cart-sidebars">
-        <h2>Keranjang Belanja</h2>
-        <div class="cart-list">
-            <?php if (!empty($cartItems)): ?>
-                <?php foreach ($cartItems as $item): ?>
-                    <div class="cart-item" data-id="<?= htmlspecialchars($item['produk_id']) ?>">
-                        <div class="cart-item-content">
-                            <img src="<?= htmlspecialchars($item['gambar_produk']) ?>" alt="<?= htmlspecialchars($item['nama_produk']) ?>" class="cart-item-image">
-                            <div class="cart-item-details">
-                                <p class="cart-item-name"><?= htmlspecialchars($item['nama_produk']) ?> x <span class="item-quantity"><?= htmlspecialchars($item['quantity']) ?></span></p>
-                                <p class="cart-item-price"><?= number_format($item['harga'] * $item['quantity'], 0, ',', '.') ?> IDR</p>
-                            </div>
-                            <div class="cart-item-actions">
-                                <button onclick="changeQuantity(<?= $item['produk_id'] ?>, <?= $item['quantity'] - 1 ?>)">-</button>
-                                <button onclick="changeQuantity(<?= $item['produk_id'] ?>, <?= $item['quantity'] + 1 ?>)">+</button>
-                            </div>
-                        </div>
-                    </div>
-                <?php endforeach; ?>
-            <?php else: ?>
-                <p>Keranjang belanja kosong.</p>
-            <?php endif; ?>
+    <!--=====NAVBAR MODIFIED FIXED=====-->
+    <nav class="navbar">
+      <div class="navbar_contents">
+        <div class="logo">
+          <img src="../public/img/logo/redget_logo.png" alt="Redget">
         </div>
-        <div class="cart-total">
-            <p>Total: <span class="total-price"><?= number_format(array_sum(array_column($cartItems, 'harga')), 0, ',', '.') ?></span> IDR</p>
+        <ul class="nav-links" style=
+        "padding-left: 0;
+        margin-bottom: 0;
+        ">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Kategori</a></li>
+            <li><a href="#">Promo</a></li>
+        </ul>
+        <div class="nav-icons">
+            <a href=""><i data-feather="shopping-cart"></i></a>
+            <a href="#" id="open-form-btn"><i data-feather="user"></i></a>
+        </div>
+      </div>
+    </nav>
+
+
+
+
+
+    <!-- BAGIAN BODY KERANJANG SAYA -->
+    <h2 class="judul_keranjang_saya">Keranjang Saya</h2>
+    <div class="container">
+        <div class="cart-items">
+            <div class="cart-item">
+                <img src="../public/img/barang/jpg/iphone_13_pro_max.jpg" alt="Basic Tee Sienna">
+                <div class="item-details">
+                    <h3>iPhone 14</h3>
+                    <p>Bagus</p>
+                    <p class="status in-stock">Baru</p>
+                </div>
+                <div class="item-quantity">
+                    <label for="qty1">Jumlah</label>
+                    <select id="qty1">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                </div>
+                <p class="item-price">Rp 14.000.000</p>
+            </div>
+            <div class="cart-item">
+                <img src="../public/img/barang/jpg/iphone_13_pro_max.jpg" alt="Basic Tee Black">
+                <div class="item-details">
+                    <h3>Iphone 13 Pro Max</h3>
+                    <p>Kondisi mulus 100%, charger lengkap. Warna biru.</p>
+                    <p class="status delayed">90%</p>
+                </div>
+                <div class="item-quantity">
+                    <label for="qty2">Jumlah</label>
+                    <select id="qty2">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                </div>
+                <p class="item-price">Rp 10.000.000</p>
+            </div>
+            <div class="cart-item">
+                <img src="../public/img/barang/jpg/samsung_z_flip.jpg" alt="Nomad Tumbler">
+                <div class="item-details">
+                    <h3>Samsung Z-Flip</h3>
+                    <p>Kondisi mulus 100%, tidak ada lecet. Warna biru.</p>
+                    <p class="status in-stock">90%</p>
+                </div>
+                <div class="item-quantity">
+                    <label for="qty3">Jumlah</label>
+                    <select id="qty3">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                </div>
+                <p class="item-price">Rp 13.000.000</p>
+            </div>
+        </div>
+
+        <div class="order-summary">
+            <h3>Total Harga</h3>
+            <div class="summary-item">
+                <span>Subtotal</span>
+                <span>Rp 37.000.000</span>
+            </div>
+            <div class="summary-item">
+                <span>Biaya Pengiriman</span>
+                <span>Rp 200.000</span>
+            </div>
+            <div class="summary-item order-total">
+                <span>Order total</span>
+                <span>Rp 37.200.000</span>
+            </div>
             <button class="checkout-btn">Checkout</button>
         </div>
     </div>
 
-    <div id="checkoutModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <h2>Konfirmasi Pesanan</h2>
-            <div id="modalCartList"></div> <!-- Kontainer daftar barang -->
-            <p>Total: <span class="total-price-modal"></span> IDR</p>
-            <button onclick="payWithMidtrans()">Confirm</button>
-            <button onclick="closeModal()">Batal</button>
-        </div>
+
+
+
+
+<div class="container">
+    <div class="cart-items">
+        <?php if (!empty($cartItems)): ?>
+            <?php foreach ($cartItems as $item): ?>
+                <div class="cart-item" data-id="<?= htmlspecialchars($item['produk_id']) ?>">
+                    <div class="cart-item-content">
+                        <img src="<?= htmlspecialchars($item['gambar_produk']) ?>" alt="<?= htmlspecialchars($item['nama_produk']) ?>" class="cart-item-image">
+                        <div class="cart-item-details">
+                            <h3 class="cart-item-name"><?= htmlspecialchars($item['nama_produk']) ?> x <span class="item-quantity"><?= htmlspecialchars($item['quantity']) ?></span></h3>
+                            <p class="cart-item-price"><?= number_format($item['harga'] * $item['quantity'], 0, ',', '.') ?> IDR</p>
+                        </div>
+                        <div class="cart-item-actions">
+                            <button onclick="changeQuantity(<?= $item['produk_id'] ?>, <?= $item['quantity'] - 1 ?>)">-</button>
+                            <button onclick="changeQuantity(<?= $item['produk_id'] ?>, <?= $item['quantity'] + 1 ?>)">+</button>
+                        </div>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <p>Keranjang belanja kosong.</p>
+        <?php endif; ?>
+    </div>
+    <div class="cart-total">
+        <p>Total: <span class="total-price"><?= number_format(array_sum(array_column($cartItems, 'harga')), 0, ',', '.') ?></span> IDR</p>
+        <button class="checkout-btn">Checkout</button>
+    </div>
+</div>
+
+
+
+
+
+<!--=====FOOTER MODIFIED FIXED=====-->
+<footer>
+  <div class="footer-container">
+    <div class="footer-left">
+      <div class="logo">
+        <img src="../public/img/logo/redget_logo.png" alt="">
+      </div>
     </div>
 
+    <div class="deskripsi">
+    <h1>
+  <p class="typewrite" data-period="2000" data-type='[ "adalah Platform Jual Beli Barang Bekas Berkualitas Tinggi.", "adalah tempat menemukan gadget impian dengan harga murah!", "adalah Platform Jual Beli Barang Bekas Berkualitas Tinggi.", "adalah tempat menemukan gadget impian dengan harga murah!" ]'>
+    <span class="wrap"></span>
+  </p>
+</h1>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p><i class="bi bi-c-circle"></i> Redget 2024 | Hak Cipta Dilindungi</p>
+  </div>
+</footer>
 
 <script>
 // Inisialisasi keranjang dari PHP

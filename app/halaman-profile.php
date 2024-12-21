@@ -143,7 +143,7 @@ try {
      <!-- CSS UNTUK SEMUA HALAMAN -->
      <link rel="stylesheet" href="../public/css/style.css">
     <!-- CSS KHUSUS UNTUK HALAMAN INI -->
-    <link rel="stylesheet" href="../app/halaman-profile.css">
+    <link rel="stylesheet" href="../app/halaman-profile-baru.css">
 </head>
 
 <!-- FEATHER ICON -->
