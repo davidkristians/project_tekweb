@@ -12,7 +12,7 @@ $host = "localhost";
 $port = "5432";
 $dbname = "Web-Ecommerce";
 $dbUser = "postgres";
-$dbPassword = "postgres";
+$dbPassword = "456287";
 
 $message = "";
 
@@ -96,6 +96,20 @@ try {
     <link rel="stylesheet" href="../main/dashboard.css">
     <link rel="stylesheet" href="../main/profile.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../app/halaman-default-baru.css">
+    <!-- GOOGLE FONTS -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+    <!-- BOOTSTRAP -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
+    <!-- BOOTSTRAP ICON -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <!-- TAILWIND -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
         .sticky-note {
             background-color: black;
@@ -112,24 +126,32 @@ try {
         }
     </style>
 </head>
+<script src="https://unpkg.com/feather-icons"></script>
 <body>
 <nav class="navbar">
-    <div class="navbar-brand">ReTech</div>
-    <div class="navbar-links">
-        <a href="../main/halaman-user.php">Home</a>
-        <a href="#">Kategori</a>
-        <a href="../Produk/produk-Main.php">Produk</a>
-        <a href="cart.html"> <!--ubah cart di product.php-->
-            <i class="fas fa-shopping-cart" title="Shopping Cart"></i>
-        </a>
-        <a href="../main/halaman-profile.php">
-            <i class="fas fa-user" title="Profile"></i>
-        </a>
-        <a href="logout.php">
-            <i class="fas fa-sign-out-alt" title="Logout"></i>
-        </a>
-    </div>
-</nav>
+      <div class="navbar_contents">
+        <div class="logo">
+          <img src="../public/img/logo/redget_logo.png" alt="Redget">
+        </div>
+        <ul class="nav-links" style=
+        "padding-left: 0;
+        margin-bottom: 0;
+        ">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Kategori</a></li>
+            <li><a href="#">Promo</a></li>
+        </ul>
+        <div class="nav-icons">
+            <a class="cart-icon" href="../app/shopping_cart.php">
+                <i data-feather="shopping-cart"></i><span class="cart-count">0</span>
+            </a>
+            <a href="../app/halaman-profile.php" id="open-form-btn"><i data-feather="user"></i></a>
+            <a href="../app/logout.php">
+                <i data-feather="log-out"></i>
+            </a>
+        </div>
+      </div>
+    </nav>
 
 <section class="profile">
     <h2>Edit Produk</h2>
@@ -218,6 +240,10 @@ try {
         </div>
     </div>
 </section>
+
+<script>
+  feather.replace();
+</script>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>

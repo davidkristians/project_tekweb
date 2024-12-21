@@ -3,7 +3,7 @@
     $port = "5432";          
     $dbname = "Web-Ecommerce"; 
     $dbUser = "postgres";    
-    $dbPassword = "postgres";  
+    $dbPassword = "456287";  
 
     $message = "";
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -110,7 +110,7 @@
         margin-bottom: 0;
         ">
             <li><a href="#">Home</a></li>
-            <li><a href="#">Kategori</a></li>
+            <li><a href="#products">Kategori</a></li>
             <li><a href="#">Promo</a></li>
         </ul>
         <div class="nav-icons">

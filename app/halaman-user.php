@@ -106,7 +106,7 @@
         margin-bottom: 0;
         ">
             <li><a href="#">Home</a></li>
-            <li><a href="#">Kategori</a></li>
+            <li><a href="#products">Kategori</a></li>
             <li><a href="#">Promo</a></li>
         </ul>
         <div class="nav-icons">
@@ -177,7 +177,7 @@
             <div class="card">
                 <img src="<?= htmlspecialchars($produk['gambar_produk']) ?>" alt="<?= htmlspecialchars($produk['nama_produk']) ?>" />
                 <div class="judul_deskripsi_harga">
-                    <h3><?= htmlspecialchars($produk['nama_produk']) ?></h3>
+                    <h3><?= htmlspecialchars(string: $produk['nama_produk']) ?></h3>
                     <p><?= htmlspecialchars($produk['deskripsi']) ?></p>
                     <p><em><?= htmlspecialchars($produk['kondisi_barang']) ?></em></p>
                     <div class="price">Rp <?= number_format($produk['harga'], 0, ',', '.') ?></div>

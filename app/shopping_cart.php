@@ -39,163 +39,104 @@ try {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Keranjang Belanja</title>
-
-    <!-- GOOGLE FONTS -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-
-    <!-- BOOTSTRAP -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script> 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
-    <!-- BOOTSTRAP ICON -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-
-    <!-- TAILWIND -->
-    <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- CSS UNTUK SEMUA HALAMAN -->
+    <link rel="stylesheet" href="../Produk/produk.css">
+    <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="SB-Mid-client-y7Pr6iRjBrwjlkGf"></script>
     <link rel="stylesheet" href="../public/css/style.css">
-    <!-- CSS KHUSUS UNTUK HALAMAN INI -->
-    <link rel="stylesheet" href="../app/shopping_cart_baru.css">
-    <!-- <link rel="stylesheet" href="../Produk/produk.css"> -->
+        <!-- GOOGLE FONTS -->
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        /* Modal */
+        .modal {
+            display: none; /* Sembunyikan modal secara default */
+            position: fixed;
+            z-index: 1001;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5); /* Latar belakang hitam transparan */
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%; /* Lebar modal */
+            max-width: 500px; /* Lebar maksimum modal */
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .modal-cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .modal-cart-item img {
+            max-width: 50px;
+            max-height: 50px;
+        }
+    </style>
 </head>
-
-<!-- FEATHER ICON -->
-<script src="https://unpkg.com/feather-icons"></script>
-
 <body>
-    <!--=====NAVBAR MODIFIED FIXED=====-->
-    <nav class="navbar">
-      <div class="navbar_contents">
-        <div class="logo">
-          <img src="../public/img/logo/redget_logo.png" alt="Redget">
-        </div>
-        <ul class="nav-links" style=
-        "padding-left: 0;
-        margin-bottom: 0;
-        ">
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Kategori</a></li>
-            <li><a href="#">Promo</a></li>
-        </ul>
-        <div class="nav-icons">
-            <a href=""><i data-feather="shopping-cart"></i></a>
-            <a href="#" id="open-form-btn"><i data-feather="user"></i></a>
-        </div>
-      </div>
-    </nav>
-
-    <!-- BAGIAN BODY KERANJANG SAYA -->
-    <!-- <h2 class="judul_keranjang_saya">Keranjang Saya</h2>
-    <div class="container">
-        <div class="cart-items">
-            <div class="cart-item">
-                <img src="sienna-tshirt.jpg" alt="Basic Tee Sienna">
-                <div class="item-details">
-                    <h3>Basic Tee</h3>
-                    <p>Sienna | Large</p>
-                    <p class="status in-stock">✔ In stock</p>
-                </div>
-                <div class="item-quantity">
-                    <label for="qty1">Qty:</label>
-                    <select id="qty1">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                    </select>
-                </div>
-                <p class="item-price"></p>
-            </div>
-            <div class="cart-item">
-                <img src="black-tshirt.jpg" alt="Basic Tee Black">
-                <div class="item-details">
-                    <h3>Basic Tee</h3>
-                    <p>Black | Large</p>
-                    <p class="status delayed">Ships in 3–4 weeks</p>
-                </div>
-                <div class="item-quantity">
-                    <label for="qty2">Qty:</label>
-                    <select id="qty2">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                    </select>
-                </div>
-                <p class="item-price">$32.00</p>
-            </div>
-            <div class="cart-item">
-                <img src="tumbler.jpg" alt="Nomad Tumbler">
-                <div class="item-details">
-                    <h3>Nomad Tumbler</h3>
-                    <p>White</p>
-                    <p class="status in-stock">✔ In stock</p>
-                </div>
-                <div class="item-quantity">
-                    <label for="qty3">Qty:</label>
-                    <select id="qty3">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                    </select>
-                </div>
-                <p class="item-price">$35.00</p>
-            </div>
-        </div>
-
-        <div class="order-summary">
-            <h3>Order Summary</h3>
-            <div class="summary-item">
-                <span>Subtotal</span>
-                <span>$99.00</span>
-            </div>
-            <div class="summary-item">
-                <span>Shipping estimate</span>
-                <span>$5.00</span>
-            </div>
-            <div class="summary-item">
-                <span>Tax estimate</span>
-                <span>$8.32</span>
-            </div>
-            <div class="summary-item">
-                <span>Order total</span>
-                <span>$112.32</span>
-            </div>
-            <button class="checkout-btn">Checkout</button>
-        </div>
-    </div> -->
-
-
-
-
-
-<div class="container">
-    <div class="cart-items">
-        <?php if (!empty($cartItems)): ?>
-            <?php foreach ($cartItems as $item): ?>
-                <div class="cart-item" data-id="<?= htmlspecialchars($item['produk_id']) ?>">
-                    <div class="cart-item-content">
-                        <img src="<?= htmlspecialchars($item['gambar_produk']) ?>" alt="<?= htmlspecialchars($item['nama_produk']) ?>" class="cart-item-image">
-                        <div class="cart-item-details">
-                            <h3 class="cart-item-name"><?= htmlspecialchars($item['nama_produk']) ?> x <span class="item-quantity"><?= htmlspecialchars($item['quantity']) ?></span></h3>
-                            <p class="cart-item-price"><?= number_format($item['harga'] * $item['quantity'], 0, ',', '.') ?> IDR</p>
-                        </div>
-                        <div class="cart-item-actions">
-                            <button onclick="changeQuantity(<?= $item['produk_id'] ?>, <?= $item['quantity'] - 1 ?>)">-</button>
-                            <button onclick="changeQuantity(<?= $item['produk_id'] ?>, <?= $item['quantity'] + 1 ?>)">+</button>
+    <div class="cart-sidebars">
+        <h2>Keranjang Belanja</h2>
+        <div class="cart-list">
+            <?php if (!empty($cartItems)): ?>
+                <?php foreach ($cartItems as $item): ?>
+                    <div class="cart-item" data-id="<?= htmlspecialchars($item['produk_id']) ?>">
+                        <div class="cart-item-content">
+                            <img src="<?= htmlspecialchars($item['gambar_produk']) ?>" alt="<?= htmlspecialchars($item['nama_produk']) ?>" class="cart-item-image">
+                            <div class="cart-item-details">
+                                <p class="cart-item-name"><?= htmlspecialchars($item['nama_produk']) ?> x <span class="item-quantity"><?= htmlspecialchars($item['quantity']) ?></span></p>
+                                <p class="cart-item-price"><?= number_format($item['harga'] * $item['quantity'], 0, ',', '.') ?> IDR</p>
+                            </div>
+                            <div class="cart-item-actions">
+                                <button onclick="changeQuantity(<?= $item['produk_id'] ?>, <?= $item['quantity'] - 1 ?>)">-</button>
+                                <button onclick="changeQuantity(<?= $item['produk_id'] ?>, <?= $item['quantity'] + 1 ?>)">+</button>
+                            </div>
                         </div>
                     </div>
-                </div>
-            <?php endforeach; ?>
-        <?php else: ?>
-            <p>Keranjang belanja kosong.</p>
-        <?php endif; ?>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <p>Keranjang belanja kosong.</p>
+            <?php endif; ?>
+        </div>
+        <div class="cart-total">
+            <p>Total: <span class="total-price"><?= number_format(array_sum(array_column($cartItems, 'harga')), 0, ',', '.') ?></span> IDR</p>
+            <button class="checkout-btn">Checkout</button>
+        </div>
     </div>
-    <div class="cart-total">
-        <p>Total: <span class="total-price"><?= number_format(array_sum(array_column($cartItems, 'harga')), 0, ',', '.') ?></span> IDR</p>
-        <button class="checkout-btn">Checkout</button>
+
+    <div id="checkoutModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Konfirmasi Pesanan</h2>
+            <div id="modalCartList"></div> <!-- Kontainer daftar barang -->
+            <p>Total: <span class="total-price-modal"></span> IDR</p>
+            <button onclick="payWithMidtrans()">Confirm</button>
+            <button onclick="closeModal()">Batal</button>
+        </div>
     </div>
-</div>
+
 
 <script>
 // Inisialisasi keranjang dari PHP
@@ -352,10 +293,7 @@ function payWithMidtrans() {
 document.querySelector('.checkout-btn').addEventListener('click', openModal);
 </script>
 
-<!-- FEATHER ICONS SCRIPT -->
-<script>
-  feather.replace();
-</script>
+
 
 </body>
 </html>

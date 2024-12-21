@@ -165,7 +165,7 @@ try {
             <li><a href="#">Promo</a></li>
         </ul>
         <div class="nav-icons">
-            <a href=""><i data-feather="shopping-cart"></i></a>
+            <a href="../app/shopping_cart.php"><i data-feather="shopping-cart"></i></a>
             <a href="../app/halaman-profile.php" id="open-form-btn"><i data-feather="user"></i></a>
             <a href="../app/logout.php">
                 <i data-feather="log-out"></i>
@@ -199,7 +199,7 @@ try {
     <?php endif; ?>
 
     <!-- Form Update Profile -->
-    <form action="profile.php" method="POST">
+    <form action="halaman-profile.php" method="POST">
         <div>
             <label for="name">Nama:</label>
             <input type="text" id="name" value="<?php echo htmlspecialchars($user['nama']); ?>" disabled>
@@ -226,7 +226,7 @@ try {
 <!-- Form untuk Menambahkan Produk -->
     <?php if ($user['role'] === 'Penjual'): ?>
         <h3>Tambah Produk</h3>
-        <form action="profile.php" method="POST">
+        <form action="halaman-profile.php" method="POST">
             <!-- Nama Produk -->
             <label for="product_name">Nama Produk:</label>
             <input type="text" id="product_name" name="product_name" required>
@@ -290,10 +290,10 @@ try {
 
     <!-- HAPUS AKUN atau LOG OUT -->
      <div class="del-or-log-out">
-         <form action="profile.php" method="POST">
+         <form action="halaman-profile.php" method="POST">
              <button class="logout-btn" type="submit" name="logout">Logout</button>
          </form>
-         <form action="profile.php" method="POST">
+         <form action="halaman-profile.php" method="POST">
              <button class="delete-acc-btn" type="submit" name="delete_account" onclick="return confirm('Apakah Anda yakin ingin menghapus akun Anda?')">Hapus Akun</button>
          </form>
      </div>

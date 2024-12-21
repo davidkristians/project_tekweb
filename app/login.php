@@ -9,7 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $servername = "localhost";
     $username = "postgres";
-    $db_password = "postgres";
+    $db_password = "456287";
     $dbname = "Web-Ecommerce";
     $port = "5432";
 
