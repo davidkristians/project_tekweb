@@ -170,28 +170,30 @@
     </div>
 </div>
 
-    <!-- PRODUCT FIXED MODIFIED -->
-    <?php if (!empty($produkData)): ?>
-    <section class="produk_kami">
-        <h1>Belanja Sekarang</h1>
-    </section>
-    <section class="products">
-        <?php foreach ($produkData as $produk): ?>
-            <div class="card">
-                <img src="<?= htmlspecialchars($produk['gambar_produk']) ?>" alt="<?= htmlspecialchars($produk['nama_produk']) ?>" />
-                <div class="judul_deskripsi_harga">
-                    <h3><?= htmlspecialchars(string: $produk['nama_produk']) ?></h3>
-                    <p><?= htmlspecialchars($produk['deskripsi']) ?></p>
-                    <p><em><?= htmlspecialchars($produk['kondisi_barang']) ?></em></p>
-                    <div class="price">Rp <?= number_format($produk['harga'], 0, ',', '.') ?></div>
-                    <button class="tambah-keranjang" onclick="addToCart(<?= $produk['produk_id']; ?>)">Tambahkan ke Keranjang</button>
-                </div>
+<!-- PRODUCT FIXED MODIFIED -->
+<?php if (!empty($produkData)): ?>
+<section class="produk_kami">
+    <h1>Belanja Sekarang</h1>
+</section>
+<section class="products">
+    <?php foreach ($produkData as $produk): ?>
+        <div class="card">
+            <img src="<?= htmlspecialchars($produk['gambar_produk']) ?>" alt="<?= htmlspecialchars($produk['nama_produk']) ?>" />
+            <div class="judul_deskripsi_harga">
+                <h3><?= htmlspecialchars($produk['nama_produk']) ?></h3>
+                <p><?= htmlspecialchars($produk['deskripsi']) ?></p>
+                <p><em><?= htmlspecialchars($produk['kondisi_barang']) ?></em></p>
+                <div class="price">Rp <?= number_format($produk['harga'], 0, ',', '.') ?></div>
+                <div class="stock">Stok Tersedia: <?= htmlspecialchars($produk['jumlah_stock']) ?></div> <!-- Menampilkan stok produk -->
+                <button class="tambah-keranjang" onclick="addToCart(<?= $produk['produk_id']; ?>)">Tambahkan ke Keranjang</button>
             </div>
-        <?php endforeach; ?>
-    <?php else: ?>
-        <p>Produk belum tersedia.</p>
-    <?php endif; ?>
-    </section>
+        </div>
+    <?php endforeach; ?>
+<?php else: ?>
+    <p>Produk belum tersedia.</p>
+<?php endif; ?>
+</section>
+
     
 
 

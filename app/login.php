@@ -33,6 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION["user_email"] = $user["email"];
             $_SESSION["user_name"] = $user["nama"];
             $_SESSION["user_id"] = $user["user_id"];
+            $_SESSION["role"] = $user["role"];
 
             header("Location: ../app/halaman-user.php");
             exit(); 

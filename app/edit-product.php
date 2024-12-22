@@ -92,13 +92,10 @@ try {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Produk</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../main/dashboard.css">
-    <link rel="stylesheet" href="../main/profile.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../app/halaman-default-baru.css">
-    <!-- GOOGLE FONTS -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <!-- GOOGLE FONTS -->
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 
     <!-- BOOTSTRAP -->
@@ -110,13 +107,20 @@ try {
 
     <!-- TAILWIND -->
     <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- CSS UNTUK SEMUA HALAMAN -->
+    <link rel="stylesheet" href="../public/css/style.css">
+    <!-- CSS KHUSUS UNTUK HALAMAN INI -->
+    <link rel="stylesheet" href="../app/halaman-default-baru-2.css">
+    <link rel="stylesheet" href="../Produk/produk.css">
     <style>
         .sticky-note {
             background-color: black;
             padding: 20px;
             border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 6px rgba(255, 248, 248, 0.1);
             margin: 10px;
+            color: white;
         }
         .sticky-note h4 {
             margin-bottom: 15px;
@@ -137,7 +141,7 @@ try {
         "padding-left: 0;
         margin-bottom: 0;
         ">
-            <li><a href="#">Home</a></li>
+            <li><a href="../app/halaman-user.php">Home</a></li>
             <li><a href="#">Kategori</a></li>
             <li><a href="#">Promo</a></li>
         </ul>

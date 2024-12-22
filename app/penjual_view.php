@@ -12,7 +12,7 @@ $host = "localhost";
 $port = "5432";
 $dbname = "Web-Ecommerce";
 $dbUser    = "postgres";
-$dbPassword = "456287";
+$dbPassword = "postgres";
 
 try {
     $conn = new PDO("pgsql:host=$host;port=$port;dbname=$dbname", $dbUser, $dbPassword);
@@ -63,6 +63,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['order_id'], $_POST['s
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pemesanan Penjual</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <!-- GOOGLE FONTS -->
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+    <!-- BOOTSTRAP -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
+    <!-- BOOTSTRAP ICON -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <!-- TAILWIND -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- CSS UNTUK SEMUA HALAMAN -->
+    <link rel="stylesheet" href="../public/css/style.css">
+    <!-- CSS KHUSUS UNTUK HALAMAN INI -->
+    <link rel="stylesheet" href="../app/halaman-default-baru-2.css">
+    <link rel="stylesheet" href="../Produk/produk.css">
+    <link rel="stylesheet" href="../app/halaman-pembayaran.css">
 </head>
 <script src="https://unpkg.com/feather-icons"></script>
 <body>
@@ -78,7 +98,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['order_id'], $_POST['s
         "padding-left: 0;
         margin-bottom: 0;
         ">
-            <li><a href="#">Home</a></li>
+            <li><a href="../app/halaman-user.php">Home</a></li>
             <li><a href="#products">Kategori</a></li>
             <li><a href="#">Promo</a></li>
         </ul>
@@ -96,9 +116,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['order_id'], $_POST['s
 
 
 <div class="container mt-5">
-    <h2>Pemesanan untuk Penjual</h2>
-
-    <h3 class="mt-4">Daftar Pemesanan</h3>
+    <h3 class="mt-4">Daftar Pesanan</h3>
     <table class="table table-bordered">
         <thead>
             <tr>
@@ -127,7 +145,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['order_id'], $_POST['s
                                 <input type="hidden" name="order_id" value="<?= htmlspecialchars($order['order_id']) ?>">
                                 <select name="status_order" class="form-control">
                                     <option value="Pending" <?= $order['status_order'] === 'Pending' ? 'selected' : '' ?>>Pending</option>
-                                    <option value="On-Progress" <?= $order['status_order'] === 'On-Progress' ? 'selected' : '' ?>>On-Progress</option>
                                     <option value="Success" <?= $order['status_order'] === 'Success' ? 'selected' : '' ?>>Success</option>
                                     <option value="Failed" <?= $order['status_order'] === 'Failed' ? 'selected' : '' ?>>Failed</option>
                                     <option value="In-Delivery" <?= $order['status_order'] === 'In-Delivery' ? 'selected' : '' ?>>In-Delivery</option>
@@ -146,5 +163,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['order_id'], $_POST['s
         </tbody>
     </table>
 </div>
+
+
+<script>
+  feather.replace();
+</script>
 </body>
 </html>

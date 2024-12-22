@@ -146,7 +146,6 @@ try {
     </nav>
 
 <div class="container">
-    <h2 class="judul_keranjang_saya">Keranjang Saya</h2>
     <div class="cart-items">
         <?php if (!empty($cartItems)): ?>
             <?php foreach ($cartItems as $item): ?>
@@ -184,7 +183,7 @@ try {
         <h3>Order Summary</h3>
         <?php
         $subtotal = array_sum(array_map(fn($item) => $item['harga'] * $item['quantity'], $cartItems));
-        $shipping = 200000;
+        $shipping = 0;
         $total = $subtotal + $shipping;
         ?>
         <div class="summary-item">

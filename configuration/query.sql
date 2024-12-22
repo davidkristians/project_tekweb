@@ -5,7 +5,7 @@ CREATE TABLE users (
 	password VARCHAR(255) NOT NULL,
 	nomor_telepon VARCHAR(15),
 	alamat TEXT,
-	role VARCHAR(10) DEFAULT 'Pembeli' CHECK (role IN ('Penjual', 'Pembeli')) NOT NULL
+	role VARCHAR(10) DEFAULT 'Pembeli' CHECK (role IN ('Penjual', 'Pembeli', 'admin')) NOT NULL
 );
 
 CREATE TABLE produk (
@@ -28,8 +28,6 @@ CREATE TABLE shopping_cart (
     produk_id INT REFERENCES produk(produk_id) ON DELETE CASCADE
 );
 
-SELECT * FROM shopping_cart;
-
 CREATE TABLE orders (
     order_id SERIAL PRIMARY KEY, -- ID unik lokal untuk setiap transaksi
     user_id INT REFERENCES users(user_id) ON DELETE CASCADE, -- Referensi ke pengguna
@@ -51,11 +49,7 @@ CREATE TABLE order_items (
 
 
 
-SELECT * FROM orders;
-SELECT * FROM order_items;
 
-DROP TABLE orders;
-DROP TABLE order_items;
 
 
 INSERT INTO produk (nama_produk, merk_produk, kategori, deskripsi, kondisi_barang, harga, jumlah_stock, gambar_produk, penjual_id)
@@ -64,37 +58,4 @@ VALUES
     ('Samsung Z-Flip', 'Samsung', 'HP', 'Kondisi mulus 100%, tidak ada lecet. Warna biru.', '90%', 13000000.00, 3, 'https://i.pinimg.com/736x/10/af/7d/10af7dacc86d19a1ec8e50e8f8038ac6.jpg', 1),
     ('Laptop ROG Zephyrus Duo', 'Asus', 'Laptop', 'Kondisi mulus, masih bisa untuk gaming, charger lengkap, ada screen protector. Warna hitam.', '80%', 15000000.00, 2, 'https://i.pinimg.com/736x/36/7b/21/367b211afca91a2026b33b827364cc43.jpg', 1)
 
-
-SELECT * FROM shopping_cart;
-SELECT * FROM produk;
-
-CREATE TABLE shopping_cart (
-    shopping_cart_id SERIAL PRIMARY KEY,
-	quantity INT DEFAULT 1,
-    user_id INT REFERENCES users(user_id) ON DELETE CASCADE,
-    produk_id INT REFERENCES produk(produk_id) ON DELETE CASCADE
-);
-
-CREATE TABLE transactions (
-    transaction_id UUID PRIMARY KEY,
-    user_id INT NOT NULL,
-    total_price DECIMAL(10, 2) NOT NULL,
-    status VARCHAR(50) NOT NULL CHECK (status IN ('Dikemas', 'Dikirim', 'Selesai')),
-    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
-);
-
-CREATE TABLE transaction_items (
-    id SERIAL PRIMARY KEY,
-    transaction_id UUID NOT NULL,
-    produk_id INT NOT NULL,
-    quantity INT NOT NULL,
-    FOREIGN KEY (transaction_id) REFERENCES transactions(transaction_id) ON DELETE CASCADE,
-    FOREIGN KEY (produk_id) REFERENCES produk(produk_id) ON DELETE CASCADE
-);
-
-DROP TABLE transactions;
-DROP TABLE transaction_items;
-
-SELECT * FROM transactions;
-SELECT * FROM transaction_items;
 

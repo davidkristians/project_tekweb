@@ -19,7 +19,7 @@ $host = "localhost";
 $port = "5432";
 $dbname = "Web-Ecommerce";
 $dbUser = "postgres";
-$dbPassword = "456287";
+$dbPassword = "postgres";
 
 try {
     $conn = new PDO("pgsql:host=$host;port=$port;dbname=$dbname", $dbUser, $dbPassword);
@@ -56,6 +56,8 @@ try {
     ");
     foreach ($cartItems as $item) {
         $totalHargaItem = $item['harga'] * $item['quantity'];
+
+        // Simpan item ke order_items
         $stmtOrderItem->execute([
             ':order_id' => $orderId,
             ':produk_id' => $item['produk_id'],
@@ -63,9 +65,29 @@ try {
             ':harga_per_item' => $item['harga'],
             ':total_harga_item' => $totalHargaItem
         ]);
+
+        // 4. Update stok produk di tabel `produk`
+        $stmtUpdateStock = $conn->prepare("
+            UPDATE produk
+            SET jumlah_stock = jumlah_stock - :quantity
+            WHERE produk_id = :produk_id AND jumlah_stock >= :quantity
+        ");
+        $stmtUpdateStock->execute([
+            ':quantity' => $item['quantity'],
+            ':produk_id' => $item['produk_id']
+        ]);
+
+        // Periksa apakah update stok berhasil
+        if ($stmtUpdateStock->rowCount() === 0) {
+            // Jika stok tidak cukup, rollback transaksi dan beri respons error
+            $conn->rollBack();
+            http_response_code(400);
+            echo json_encode(['error' => 'Insufficient stock for product ID ' . $item['produk_id']]);
+            exit();
+        }
     }
 
-    // 4. Hapus item dari `shopping_cart`
+    // 5. Hapus item dari `shopping_cart`
     $stmtClearCart = $conn->prepare("DELETE FROM shopping_cart WHERE user_id = :user_id");
     $stmtClearCart->execute([':user_id' => $userId]);
 

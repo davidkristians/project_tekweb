@@ -1,6 +1,14 @@
 <?php
 session_start();
 
+// Mengecek apakah pengguna sudah login dan apakah role-nya admin
+if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin') {
+    header("Location: ../app/admin.php");
+    exit();
+}
+
+
+
 // Mengecek apakah pengguna sudah login
 if (!isset($_SESSION['user_email']) || !isset($_SESSION['user_name'])) {
     header("Location: ../app/halaman-default.php");
