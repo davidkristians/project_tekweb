@@ -9,7 +9,7 @@ $host = "localhost";
 $port = "5432";
 $dbname = "Web-Ecommerce";
 $dbUser = "postgres";
-$dbPassword = "456287";
+$dbPassword = "postgres";
 
 try {
     $conn = new PDO("pgsql:host=$host;port=$port;dbname=$dbname", $dbUser, $dbPassword);

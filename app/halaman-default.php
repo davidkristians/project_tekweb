@@ -3,7 +3,7 @@
     $port = "5432";          
     $dbname = "Web-Ecommerce"; 
     $dbUser = "postgres";    
-    $dbPassword = "456287";  
+    $dbPassword = "postgres";  
 
     $message = "";
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
