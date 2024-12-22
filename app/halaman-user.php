@@ -121,10 +121,6 @@
       </div>
     </nav>
 
-
-
-
-
     <!--=====HERO MODIFIED FIXED=====-->
     <section class="carousel">
       <div class="carousel-track" id="carouselTrack">
@@ -143,10 +139,6 @@
         <button class="carousel-btn" id="nextBtn">&#10095;</button>
       </div>
     </section>
-
-
-
-
 
     <!-- SHOPPING CART SIDEBAR -->
     <div class="cart-sidebar">
@@ -177,10 +169,6 @@
         <button class="checkout-btn">Checkout</button>
     </div>
 </div>
-
-
-
-
 
     <!-- PRODUCT FIXED MODIFIED -->
     <?php if (!empty($produkData)): ?>
@@ -378,7 +366,7 @@
                 // Kirim data ke server untuk disimpan di database
                 const userId = <?php echo isset($_SESSION['user_id']) ? $_SESSION['user_id'] : 'null'; ?>;
                 if (userId) {
-                    fetch('../configuration/add_to_cart.php', {
+                    fetch('../app/add_to_cart.php', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json'

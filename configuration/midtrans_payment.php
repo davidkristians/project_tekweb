@@ -17,9 +17,10 @@ if (!isset($requestData['gross_amount'])) {
 }
 
 // Buat parameter transaksi
+$order_id = uniqid('ORDER-'); // ID unik untuk transaksi
 $params = [
     'transaction_details' => [
-        'order_id' => uniqid('ORDER-'), // ID unik untuk transaksi
+        'order_id' => $order_id, // Gunakan order_id yang dihasilkan
         'gross_amount' => $requestData['gross_amount'],
     ],
     'customer_details' => [
@@ -32,7 +33,7 @@ $params = [
 try {
     // Dapatkan Snap token
     $snapToken = \Midtrans\Snap::getSnapToken($params);
-    echo json_encode(['token' => $snapToken]);
+    echo json_encode(['token' => $snapToken, 'order_id' => $order_id]); // Kembalikan order_id
 } catch (Exception $e) {
     echo json_encode(['error' => $e->getMessage()]);
 }
