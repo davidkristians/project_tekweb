@@ -104,7 +104,7 @@ if (!empty($search_transaction_id)) {
                 }
                 
                 // Masukkan item baru ke dalam list item order
-                $item['status_order'] = $item['status_order'];  // Menambahkan status_order ke item
+                // $item['status_order'] = $item['status_order'];  // Menambahkan status_order ke item
                 $currentOrderItems[] = $item;
             endforeach;
         ?>

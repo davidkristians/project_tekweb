@@ -221,6 +221,10 @@ try {
             <textarea id="address" name="address"><?php echo htmlspecialchars($user['alamat']); ?></textarea>
         </div>
         <button class="change-detail acc" type="submit" name="update">Ubah Detail Akun Anda</button>
+        <a href="view_order_status.php">
+            <button class="edit-btn"type="button">Pesanan</button>
+        </a>
+
     </form>
 
 <!-- Form untuk Menambahkan Produk -->
@@ -285,6 +289,11 @@ try {
         <a href="edit-product.php">
             <button class="edit-btn"type="button">Edit Produk</button>
         </a>
+        <div>
+        <a href="penjual_view.php">
+            <button class="edit-btn"type="button">Pesanan</button>
+        </a>
+        </div>
     <?php endif; ?>
 
 
