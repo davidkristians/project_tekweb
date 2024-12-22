@@ -1,72 +1,7 @@
-<?php
-    session_start();
-
-    if (!isset($_SESSION['user_email']) || !isset($_SESSION['user_name'])) {
-        // Jika belum login, tetap dapat mengakses halaman
-        $isLoggedIn = false;
-    } else {
-        $isLoggedIn = true;
-        // Menyimpan nama user untuk ditampilkan di pop-up
-        $user_name = $_SESSION['user_name'];
-    }
-
-    // Konfigurasi database
-    $host = "localhost";
-    $port = "5432";
-    $dbname = "Web-Ecommerce";
-    $dbUser = "postgres";
-    $dbPassword = "postgres";
-
-    try {
-        $conn = new PDO("pgsql:host=$host;port=$port;dbname=$dbname", $dbUser, $dbPassword);
-        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-        // Query untuk mengambil produk yang ditambahkan oleh penjual
-        $stmt = $conn->prepare("SELECT p.produk_id, p.nama_produk, p.merk_produk, p.kondisi_barang, p.harga, p.jumlah_stock, p.deskripsi, p.gambar_produk, u.nama AS penjual_name 
-                                FROM produk p
-                                JOIN users u ON p.penjual_id = u.user_id
-                                WHERE p.jumlah_stock > 0"); // Hanya produk dengan stok > 0
-        $stmt->execute();
-        $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    } catch (PDOException $e) {
-        echo "Error: " . $e->getMessage();
-    }
-
-    // Mengambil Data Produk
-    $produkData = [];
-    try {
-        $conn = new PDO("pgsql:host=$host;port=$port;dbname=$dbname", $dbUser, $dbPassword);
-        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-  
-        $sql = "SELECT * FROM produk";
-        $stmt = $conn->query($sql);
-        $produkData = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    } catch (PDOException $e) {
-        $message = "Error: " . $e->getMessage();
-    }
-
-    $cartItems = [];
-
-    if ($isLoggedIn) {
-        try {
-            $userId = $_SESSION['user_id']; // Assuming user_id is stored in session
-            $stmt = $conn->prepare("SELECT p.produk_id, p.nama_produk, p.harga, p.gambar_produk, c.quantity 
-                                    FROM shopping_cart c
-                                    JOIN produk p ON c.produk_id = p.produk_id
-                                    WHERE c.user_id = :user_id");
-            $stmt->bindParam(':user_id', $userId);
-            $stmt->execute();
-            $cartItems = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        } catch (PDOException $e) {
-            echo "Error: " . $e->getMessage();
-        }
-    }
-?>
-
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Redget | Jual Beli Barang Bekas Berkualitas</title>
 
@@ -87,14 +22,14 @@
     <!-- CSS UNTUK SEMUA HALAMAN -->
     <link rel="stylesheet" href="../public/css/style.css">
     <!-- CSS KHUSUS UNTUK HALAMAN INI -->
-    <link rel="stylesheet" href="../app/halaman-default-baru-2.css">
-    <link rel="stylesheet" href="../Produk/produk.css">
-</head>
+    <link rel="stylesheet" href="../app/halaman-pembayaran.css">
+  </head>
 
-<!-- FEATHER ICON -->
-<script src="https://unpkg.com/feather-icons"></script>
+  <!-- FEATHER ICON -->
+  <script src="https://unpkg.com/feather-icons"></script>
 
-<body>
+
+  <body>
     <!--=====NAVBAR MODIFIED FIXED=====-->
     <nav class="navbar">
       <div class="navbar_contents">
@@ -121,134 +56,150 @@
       </div>
     </nav>
 
-    <!--=====HERO MODIFIED FIXED=====-->
-    <section class="carousel">
-      <div class="carousel-track" id="carouselTrack">
-        <div class="carousel-slide">
-          <img src="../public/img/banner_hero/banner1.png" alt="banner1" />
-        </div>
-        <div class="carousel-slide">
-          <img src="../public/img/banner_hero/banner2.png" alt="banner2" />
-        </div>
-        <div class="carousel-slide">
-          <img src="../public/img/banner_hero/banner3.png" alt="banner3" />
-        </div>
-      </div>
-      <div class="carousel-nav">
-        <button class="carousel-btn" id="prevBtn">&#10094;</button>
-        <button class="carousel-btn" id="nextBtn">&#10095;</button>
-      </div>
-    </section>
 
-    <!-- SHOPPING CART SIDEBAR -->
-    <div class="cart-sidebar">
-        <h2>Keranjang Belanja</h2>
-        <div class="cart-list">
-            <?php if (!empty($cartItems)): ?>
-                <?php foreach ($cartItems as $item): ?>
-                    <div class="cart-item">
-                        <div class="cart-item-content">
-                            <img src="<?= htmlspecialchars($item['gambar_produk']) ?>" alt="<?= htmlspecialchars($item['nama_produk']) ?>" class="cart-item-image">
-                        <div class="cart-item-details">
-                            <p class="cart-item-name"><?= htmlspecialchars($item['nama_produk']) ?> x <?= htmlspecialchars($item['quantity']) ?></p>
-                            <p class="cart-item-price"><?= number_format($item['harga'] * $item['quantity'], 0, ',', '.') ?> IDR</p>
-                        </div>
-                        <div class="cart-item-actions">
-                            <button onclick="changeQuantity(<?= $item['produk_id'] ?>, <?= $item['quantity'] - 1 ?>)">-</button>
-                            <button onclick="changeQuantity(<?= $item['produk_id'] ?>, <?= $item['quantity'] + 1 ?>)">+</button>
-                        </div>
-                    </div>
-                </div>
-            <?php endforeach; ?>
-        <?php else: ?>
-            <p>Keranjang belanja kosong.</p>
-        <?php endif; ?>
-    </div>
-    <div class="cart-total">
-        <p>Total: <span class="total-price"><?= number_format(array_sum(array_column($cartItems, 'harga')), 0, ',', '.') ?></span> IDR</p>
-        <button class="checkout-btn">Checkout</button>
-    </div>
-</div>
 
-    <!-- PRODUCT FIXED MODIFIED -->
+    
+
+    <!-- TRANSACTION LIST MODIFIED -->
+    <div class="container">
+        <div class="header">
+            <h1>History Transaksi</h1>
+        </div>
+
+        <div class="filter-bar">
+            <select>
+                <option>Order ID</option>
+            </select>
+            <input type="text" placeholder="Cari Order ID...">
+            <input type="date">
+            <input type="date">
+            <button>Terapkan</button>
+        </div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Tanggal & Waktu</th>
+                        <th>Order ID</th>
+                        <th>Tipe Transaksi</th>
+                        <th>Metode Pembayaran</th>
+                        <th>Status</th>
+                        <th>Total Harga</th>
+                        <th>Email Anda</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>22 Des 2024, 01:10</td>
+                        <td>ORDER-6767046d56b1</td>
+                        <td>Pembayaran</td>
+                        <td>Kartu Kredit</td>
+                        <td class="status-success">Berhasil</td>
+                        <td>Rp10,015,000</td>
+                        <td>pelanggan@example.com</td>
+                    </tr>
+                    <tr>
+                        <td>22 Des 2024, 01:08</td>
+                        <td>ORDER-67670394ddc4</td>
+                        <td>Pembayaran</td>
+                        <td>Kartu Kredit</td>
+                        <td class="status-pending">Pending</td>
+                        <td>Rp10,015,000</td>
+                        <td>pelanggan@example.com</td>
+                    </tr>
+                    <tr>
+                        <td>20 Des 2024, 15:26</td>
+                        <td>ORDER-676529f511cf</td>
+                        <td>Pembayaran</td>
+                        <td>Kartu Kredit</td>
+                        <td class="status-success">Berhasil</td>
+                        <td>Rp23,000,000</td>
+                        <td>pelanggan@example.com</td>
+                    </tr>
+                    <tr>
+                        <td>20 Des 2024, 08:55</td>
+                        <td>ORDER-6764ce9e7295</td>
+                        <td>Pembayaran</td>
+                        <td>Bank Transfer</td>
+                        <td class="status-cancelled">Dibatalkan</td>
+                        <td>Rp310,060,000</td>
+                        <td>pelanggan@example.com</td>
+                    </tr>
+                    <tr>
+                        <td>20 Des 2024, 07:26</td>
+                        <td>ORDER-6764aba75513</td>
+                        <td>Pembayaran</td>
+                        <td>QRIS</td>
+                        <td class="status-expired">Tidak Berlaku</td>
+                        <td>Rp15,000</td>
+                        <td>pelanggan@example.com</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+
+
+
+
+    <!-- PRODUK FIXED MODIFIED -->
     <?php if (!empty($produkData)): ?>
     <section class="produk_kami">
-        <h1>Belanja Sekarang</h1>
+      <h1>Belanja Sekarang</h1>
     </section>
     <section class="products">
         <?php foreach ($produkData as $produk): ?>
             <div class="card">
                 <img src="<?= htmlspecialchars($produk['gambar_produk']) ?>" alt="<?= htmlspecialchars($produk['nama_produk']) ?>" />
                 <div class="judul_deskripsi_harga">
-                    <h3><?= htmlspecialchars(string: $produk['nama_produk']) ?></h3>
+                    <h3><?= htmlspecialchars($produk['nama_produk']) ?></h3>
                     <p><?= htmlspecialchars($produk['deskripsi']) ?></p>
                     <p><em><?= htmlspecialchars($produk['kondisi_barang']) ?></em></p>
                     <div class="price">Rp <?= number_format($produk['harga'], 0, ',', '.') ?></div>
-                    <button class="tambah-keranjang" onclick="addToCart(<?= $produk['produk_id']; ?>)">Tambahkan ke Keranjang</button>
                 </div>
             </div>
         <?php endforeach; ?>
+    </section>
     <?php else: ?>
         <p>Produk belum tersedia.</p>
     <?php endif; ?>
-    </section>
+
+
     
-
-
 
 
     <!--=====FOOTER MODIFIED FIXED=====-->
-    <footer>
-    <div class="footer-container">
-        <div class="footer-left">
-            <div class="logo">
-                <img src="../public/img/logo/redget_logo.png" alt="">
-            </div>
-        </div>
-        <div class="deskripsi">
-        <h1>
-            <a href="" class="typewrite" data-period="2000" data-type='[ "adalah Platform Jual Beli Barang Bekas Berkualitas Tinggi.", "adalah tempat menemukan gadget impian dengan harga murah!", "adalah Platform Jual Beli Barang Bekas Berkualitas Tinggi.", "adalah tempat menemukan gadget impian dengan harga murah!" ]'>
-                <span class="wrap"></span>
-            </a>
-        </h1>
-        </div>
+<footer>
+  <div class="footer-container">
+    <div class="footer-left">
+      <div class="logo">
+        <img src="../public/img/logo/redget_logo.png" alt="">
+      </div>
     </div>
-    <div class="footer-bottom">
-        <p><i class="bi bi-c-circle"></i> Redget 2024 | Hak Cipta Dilindungi</p>
+
+    <div class="deskripsi">
+    <h1>
+  <p class="typewrite" data-period="2000" data-type='[ "adalah Platform Jual Beli Barang Bekas Berkualitas Tinggi.", "adalah tempat menemukan gadget impian dengan harga murah!", "adalah Platform Jual Beli Barang Bekas Berkualitas Tinggi.", "adalah tempat menemukan gadget impian dengan harga murah!" ]'>
+    <span class="wrap"></span>
+  </p>
+</h1>
     </div>
-    </footer>
+  </div>
+  <div class="footer-bottom">
+    <p><i class="bi bi-c-circle"></i> Redget 2024 | Hak Cipta Dilindungi</p>
+  </div>
+</footer>
 
-    
 
-
-
-    <!-- TOAST SELAMAT DATANG -->
-    <?php if ($isLoggedIn): ?>
-    <div class="toast-container position-fixed bottom-0 end-0 p-3" id="toast-container">
-        <div class="toast align-items-center text-bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
-            <div class="d-flex">
-                <div class="toast-body">
-                    Selamat datang, <strong><?php echo htmlspecialchars($user_name); ?></strong>!
-                </div>
-                <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-            </div>
-        </div>
-    </div>
-    <?php endif; ?>
 
 
 
     
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const toastElement = document.querySelector('.toast');
-            const toast = new bootstrap.Toast(toastElement, { delay: 5000 }); 
-            toast.show();
-        });
-    </script>
+
 
 <!-- FEATHER ICONS SCRIPT -->
 <script>
@@ -282,15 +233,15 @@
 
     <!-- TYPEWRITER EFFECT FOOTER -->
     <script>
-        var TxtType = function(el, toRotate, period) {
-            this.toRotate = toRotate;
-            this.el = el;
-            this.loopNum = 0;
-            this.period = parseInt(period, 10) || 2000;
-            this.txt = '';
-            this.tick();
-            this.isDeleting = false;
-        };
+var TxtType = function(el, toRotate, period) {
+        this.toRotate = toRotate;
+        this.el = el;
+        this.loopNum = 0;
+        this.period = parseInt(period, 10) || 2000;
+        this.txt = '';
+        this.tick();
+        this.isDeleting = false;
+    };
 
     TxtType.prototype.tick = function() {
         var i = this.loopNum % this.toRotate.length;
@@ -341,7 +292,7 @@
     };
     </script>
 
-    <script>
+<script>
         // Produk dari database
         let products = <?php echo json_encode($products, JSON_HEX_TAG); ?>;
 
@@ -366,7 +317,7 @@
                 // Kirim data ke server untuk disimpan di database
                 const userId = <?php echo isset($_SESSION['user_id']) ? $_SESSION['user_id'] : 'null'; ?>;
                 if (userId) {
-                    fetch('../app/add_to_cart.php', {
+                    fetch('../configuration/add_to_cart.php', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json'
@@ -443,5 +394,6 @@
             }
         }
     </script>
-</body>
+
+  </body>
 </html>
