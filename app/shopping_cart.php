@@ -360,46 +360,7 @@ function closeModal() {
     modal.style.display = "none";
 }
 
-function payWithMidtrans() {
-        const totalPriceElement = document.querySelector('.total-price');
-        const totalPrice = parseInt(totalPriceElement.textContent.replace(/[^0-9]/g, ''));
 
-        // Buat permintaan ke server untuk mendapatkan token
-        fetch('../configuration/midtrans_payment.php', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ gross_amount: totalPrice })
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.token) {
-                window.snap.pay(data.token, {
-                    onSuccess: function(result) {
-                        alert('Pembayaran berhasil!');
-                        console.log(result);
-                        location.reload(); 
-                    },
-                    onPending: function(result) {
-                        alert('Pembayaran tertunda. Silakan selesaikan pembayaran.');
-                        console.log(result);
-                    },
-                    onError: function(result) {
-                        alert('Terjadi kesalahan dalam pembayaran.');
-                        console.error(result);
-                    },
-                    onClose: function() {
-                        alert('Anda menutup popup pembayaran tanpa menyelesaikannya.');
-                    }
-                });
-            } else {
-                alert('Gagal mendapatkan token pembayaran. Silakan coba lagi.');
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('Terjadi kesalahan saat memproses pembayaran.');
-        });
-    }
 
     function removeFromCart(productId) {
         const userId = <?php echo isset($_SESSION['user_id']) ? $_SESSION['user_id'] : 'null'; ?>;
@@ -458,46 +419,69 @@ function payWithMidtrans() {
     }
 
     function payWithMidtrans() {
-        const totalPriceElement = document.querySelector('.total-price');
-        const totalPrice = parseInt(totalPriceElement.textContent.replace(/[^0-9]/g, ''));
+    const totalPriceElement = document.querySelector('.total-price');
+    const totalPrice = parseInt(totalPriceElement.textContent.replace(/[^0-9]/g, ''));
 
-        // Buat permintaan ke server untuk mendapatkan token
-        fetch('../configuration/midtrans_payment.php', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ gross_amount: totalPrice })
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.token) {
-                window.snap.pay(data.token, {
-                    onSuccess: function(result) {
-                        alert('Pembayaran berhasil!');
-                        console.log(result);
-                        clearCart(); // Hapus semua item dari keranjang setelah pembayaran berhasil
-                        location.reload(); 
-                    },
-                    onPending: function(result) {
-                        alert('Pembayaran tertunda. Silakan selesaikan pembayaran.');
-                        console.log(result);
-                    },
-                    onError: function(result) {
-                        alert('Terjadi kesalahan dalam pembayaran.');
-                        console.error(result);
-                    },
-                    onClose: function() {
-                        alert('Anda menutup popup pembayaran tanpa menyelesaikannya.');
-                    }
-                });
-            } else {
-                alert('Gagal mendapatkan token pembayaran. Silakan coba lagi.');
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('Terjadi kesalahan saat memproses pembayaran.');
-        });
-    }
+    // Buat permintaan ke server untuk mendapatkan token
+    fetch('../configuration/midtrans_payment.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ gross_amount: totalPrice })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.token) {
+            window.snap.pay(data.token, {
+                onSuccess: function(result) {
+                    alert('Pembayaran berhasil!');
+                    console.log(result);
+
+                    // Ambil data item keranjang dari server untuk menyimpan di order dan order_items
+                    fetch('../app/save_order.php', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            total_price: totalPrice,
+                            user_id: <?php echo $_SESSION['user_id']; ?> // Pastikan user_id dari session
+                        })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            alert(`Pesanan berhasil disimpan dengan ID: ${data.order_id}`);
+                            clearCart(); // Hapus semua item dari keranjang setelah pembayaran berhasil
+                            location.reload();
+                        } else {
+                            console.error('Gagal menyimpan pesanan:', data.message);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('Terjadi kesalahan saat menyimpan pesanan.');
+                    });
+                },
+                onPending: function(result) {
+                    alert('Pembayaran tertunda. Silakan selesaikan pembayaran.');
+                    console.log(result);
+                },
+                onError: function(result) {
+                    alert('Terjadi kesalahan dalam pembayaran.');
+                    console.error(result);
+                },
+                onClose: function() {
+                    alert('Anda menutup popup pembayaran tanpa menyelesaikannya.');
+                }
+            });
+        } else {
+            alert('Gagal mendapatkan token pembayaran. Silakan coba lagi.');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Terjadi kesalahan saat memproses pembayaran.');
+    });
+}
+
 </script>
 
 
